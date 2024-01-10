@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css?family=Dosis:300,400,500');
+@font-face { font-family: "Aquarelle"; src: url(/Asset/Font/Aquarelle.ttf); }
+@font-face { font-family: "Zirkon"; src: url(/Asset/Font/Zirkon.ttf); }
+
+html, body, * {
+	font-family: 'Dosis', sans-serif;
+	transition: background var(--speed) var(--easing);
+}
+.cus-logo {
+	background: linear-gradient(93.51deg, #9B51E0 2.84%, #3081ED 99.18%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	font-style: normal;
+	font-weight: 700;
+	font-size: 32px;
+}
+.w-85 {
+	width: 85%;
+}
+.w-95 {
+	max-width: 95%;
+}
+.h-95{
+	max-height: 95%;
+}
+.dvh-100{
+	height: 100dvh;
+}
+.c-pointer {
+	cursor: pointer;
+}
+.cus-name {
+	font-family: 'Aquarelle';
+}
+.cus-mark {
+	font-family: 'Zirkon';
+}
+.cus-spinner {
+	width: 3rem;
+	height: 3rem;
+	top: calc(50% - 1.5rem);
+	right: calc(50% - 1.5rem);
+}
+.cus-truncate-2 {
+	-webkit-line-clamp: 2;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+.cus-truncate-3 {
+	-webkit-line-clamp: 3;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+.focus-ring-0 {
+	--bs-focus-ring-width: 0;
+}
+.bg-admin {
+	background-color: #673fd6 !important;
+	color: var(--bs-light) !important;
+}
+/* Ẩn hộp captcha của google */
+.grecaptcha-badge {	visibility: hidden;	}
+.pattern{
+	background-image: url(/Asset/Image/Pattern.png);
+	background-position: top right;
+	background-size: 510px auto;
+	background-repeat:repeat;
+}
+.pre-wrap {
+	white-space: pre-wrap
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script src="/Components/Category/Ctrl.js"></script>
+</head>
+<body>
+
+
+	<div class="modal fade" id="Modal_Category" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title mx-auto fw-bold text-warning text-center">Cấu hình Firebase</h5>
+				</div>
+				<div class="modal-body py-0 pt-md-2 pb-md-5">
+					<textarea class="form-control bg-transparent" rows="8" oninput="auto_grow(this)" onblur="auto_grow(this)" ng-model="config" placeholder='{&#13;"apiKey": "&lt;API_KEY&gt;",&#13;"authDomain": "&lt;PROJECT_ID&gt;.firebaseapp.com",&#13;"projectId": "&lt;PROJECT_ID&gt;",&#13;"storageBucket": "&lt;PROJECT_ID&gt;.appspot.com",&#13;"messagingSenderId": "&lt;MESSAGING_ID&gt;",&#13;"appId": "&lt;APP_ID>"&#13;}'></textarea>
+				</div>
+				<button class="btn-Purple m-3" ng-disabled="!config" ng-click="setConfig(config)" data-bs-dismiss="modal">Lưu</button>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="M4M" ng-controller="MainCtrl" data-bs-theme="{{AppTheme}}">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="google-site-verification" content="OptB15j1WqhBLXi2PP251IDvlQdA03p8ZrQAVazLU7g"/>
+	<link rel="icon" type="image/x-icon" href="Asset/Image/m4m-favicon-color.png">
+	<script src="Asset/Script/jquery.js"></script>
+	<script src="Asset/Script/jquery-validate.js"></script>
+	<script src="Asset/Script/jquery-ui.js"></script>
+	<script src="Asset/Script/angular.js"></script>
+	<script src="Asset/Script/angular-cookie.js"></script>
+	<script src="Asset/Script/angular-sanitize.js"></script>
+	<script src="Asset/Script/angular-route.js"></script>
+	<script src="Asset/Script/angular-translate.js"></script>
+	<script src="Asset/Script/angular-translate-storage-cookie.js"></script>
+	<script src="Asset/Script/angular-translate-storage-local.js"></script>
+	<script src="Asset/Script/angular-translate-loader-url.js"></script>
+	<script src="Asset/Script/scrollglue.js"></script>
+	<script src="Asset/Script/firebase-app.js"></script>
+	<script src="Asset/Script/firebase-firestore.js"></script>
+	<script src="Asset/Script/driver.js"></script>
+	<script src="Asset/Script/scrollreveal.js"></script>
+	<script src="Asset/Script/anime.js"></script>
+	<script src="Asset/Script/aos.js"></script>
+	<script src="Asset/Script/chart.js"></script>
+    <script src="Asset/Script/emoji-mart.js"></script>
+	<script src="Asset/Script/Main.js"></script>
+	<script src="Asset/Script/MainCtrl.js"></script>
+	<!-- <script src="Asset/Script/Language.js"></script> -->
+	<script src="Components/Config/Ctrl.js"></script>
+	<script src="Pages/Home/Ctrl.js"></script>
+	<script src="Pages/Income/Ctrl.js"></script>
+	<script src="Pages/Sending/Ctrl.js"></script>
+	<script src="Pages/Statistical/Ctrl.js"></script>
+	<script src="Asset/Script/Route.js"></script>
+	<title>Money for Monthly | M4M</title>
+    <meta property="description" name="description" content="Quản lý, thống kê chi tiêu của bạn hàng tháng">
+	<link rel="stylesheet" href="Asset/Style/bootstrap.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+	<link rel="stylesheet" href="Asset/Style/driver.css"/>
+	<link rel="stylesheet" href="Asset/Style/aos.css">
+	<link rel="stylesheet" href="Asset/Style/Main.css">
+	<link rel="stylesheet" href="Asset/Style/LinkHover.css">
+	<link rel="stylesheet" href="Asset/Style/MagicCard.css">
+	<link rel="stylesheet" href="Asset/Style/Scrollbar.css">
+	<link rel="stylesheet" href="Asset/Style/btnError.css">
+	<link rel="stylesheet" href="Asset/Style/btnPurple.css">
+	<link rel="stylesheet" href="Asset/Style/CusRadioCheckbox.css">
+</head>
+<body class="d-flex flex-column pattern" style="min-height: 100vh">
+
+
+
+	<!-- Thông báo lỗi khi không được cấp quyền javascript -->
+	<noscript>
+		<meta http-equiv="refresh" content="10"><!-- Tự động load lại trang sau 10s -->
+		<div class="position-relative vh-100 bg-dark pattern text-light">
+			<div class="position-absolute top-50 start-50 translate-middle text-center w-100 p-2">
+				<p class="h3 pb-2 text-danger">Không thể sử dụng dịch vụ Javascript</p>
+				<p class="lead fs-5">
+					Money for Monthly | M4M không thể hoạt động nếu không được cấp quyền sử dụng javascript trên thiết bị của bạn!!!<br>
+					Vui lòng xem hướng dẫn
+					<a href="https://www.enablejavascript.io/vn" class="cus-link-hover">tại đây
+						<svg viewBox="0 0 70 36">
+							<path d="M6.9739 30.8153H63.0244C65.5269 30.8152 75.5358 -3.68471 35.4998 2.81531C-16.1598 11.2025 0.894099 33.9766 26.9922 34.3153C104.062 35.3153 54.5169 -6.68469 23.489 9.31527"/>
+						</svg>
+					</a>
+					để cấp quyền sử dụng javascript cho M4M &lt3 
+				</p>
+				<a href="." class="text-decoration-none">
+					<button class="btn-Purple">Thử lại sau khi cấp quyền</button>
+				</a>
+			</div>
+		</div>
+	</noscript>
+
+
+	<!-- Chèn thanh điều hướng -->
+	<!-- <div ng-include="'Components/Header/Header.html'"></div> -->
+	<!-- Giao diện -->
+	<div ng-view autoscroll></div>
+	<!-- Chèn các modal hiển thị -->
+	<div ng-include="'Components/Modal/index.html'"></div>
+	<!-- Chèn chân trang -->
+	<!-- <div ng-include="'Components/Footer/Footer.html'" class="mt-auto"></div> -->
+
+
+
+	<script src="Asset/Script/bootstrap-bundle.js"></script>
+	<script>AOS.init();</script>
+</body>
+</html>
