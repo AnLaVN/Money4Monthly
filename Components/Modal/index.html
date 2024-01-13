@@ -3,14 +3,14 @@
 <body>
 
 
-	<div ng-include="'Components/Config/index.html'"></div>
-	<div ng-include="'Components/Wallet/index.html'"></div>
-	<div ng-include="'Components/Category/index.html'"></div>
+	<div ng-include="'Components/Config'"></div>
+	<div ng-include="'Components/Wallet'"></div>
+	<div ng-include="'Components/Category'"></div>
 
 	<div class="toast-container position-fixed top-0 end-0 p-3" aria-live="assertive" aria-atomic="true">
 		<div class="toast border border-{{noti.color}}" data-bs-delay="10000" ng-repeat="noti in Notifis" id="Notifi{{noti.time.getTime()}}">
 			<div class="toast-header">
-				<strong class="me-auto"><i class="bi bi-bell-fill me-2"></i>M4M - {{'home.Notification' | translate}}</strong>
+				<strong class="me-auto"><i class="bi bi-bell-fill me-2"></i>M4M - {{'m4m.notification' | translate}}</strong>
 				<small>{{noti.time | date:'HH:mm:ss'}}</small>
 				<button type="button" class="btn-close" data-bs-dismiss="toast"></button>
 			</div>
