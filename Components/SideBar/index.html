@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+
+
+	<button type="button" id="SideBarBtn" class="btn bg-body-secondary rounded-circle border position-fixed top-0 start-0 m-3 p-0 text-center" 
+		style="height:60px;width:60px;z-index:1035" data-bs-toggle="offcanvas" data-bs-target="#SideBar">
+		<i class="bi bi-list-ul fs-3"></i>
+	</button>
+
+	<div class="offcanvas offcanvas-start" tabindex="-1" id="SideBar" ng-controller="SideBarCtrl">
+		<div class="offcanvas-header">
+			<a href="#!home" class="mb-3 mb-md-0">
+				<img class="img-fluid col-5" src="/Asset/Image/m4m-high-resolution-logo-transparent.png" alt="M4M Logo">
+			</a>
+			<button class="btn-close position-absolute top-0 end-0 m-2 fs-3" data-bs-dismiss="offcanvas"></button>
+		</div>
+		<div class="offcanvas-body d-flex flex-column">
+
+			<ul class="nav nav-pills flex-column">
+				<li class="nav-item">
+					<a href="#!home" class="nav-link {{isThisPage('/home')}}">
+						<i class="bi bi-house fs-6 me-2"></i>{{'m4m.home' | translate}}
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="#!income" class="nav-link {{isThisPage('/income')}}">
+						<i class="bi bi-cash-coin fs-6 me-2"></i>{{'m4m.income' | translate}}
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="#!sending" class="nav-link {{isThisPage('/sending')}}">
+						<i class="bi bi-cash-stack fs-6 me-2"></i>{{'m4m.sending' | translate}}
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="#!statistical" class="nav-link {{isThisPage('/statistical')}}">
+						<i class="bi bi-graph-up fs-6 me-2"></i>{{'m4m.statistical' | translate}}
+					</a>
+				</li>
+				<hr class="my-3">
+				<li class="nav-item dropend">
+					<button class="btn dropdown-toggle" data-bs-toggle="dropdown">
+						<i class="bi bi-globe-asia-australia fs6 me-2"></i>{{'m4m.language' | translate}}
+					</button>
+					<ul class="dropdown-menu">
+						<li class="dropdown-item c-pointer" ng-repeat="l in Languages" ng-click="ChangeLanguage(l.id)">{{l.icon}} {{l.name}}</li>
+					</ul>
+				</li>
+			</ul>
+			<hr class="mt-auto">
+			<div class="hstack dropdown">
+				<button class="btn d-flex align-items-center dropdown-toggle" data-bs-toggle="dropdown">
+					<img src="https://github.com/AnLaVN.png" width="32" height="32" class="rounded-circle me-2">
+					<strong>AnLaVN</strong>
+				</button>
+				<div ng-include="'Components/ThemeToggle'" class="ms-auto"></div>
+				<ul class="dropdown-menu text-small shadow">
+					<li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#Modal_Category">{{'category.name' | translate}}</button></li>
+					<li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#Modal_Wallet">{{'wallet.name' | translate}}</button></li>
+					<li><hr class="dropdown-divider"></li>
+					
+					<li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#Modal_Config">{{'config.name' | translate}}</button></li>
+				</ul>
+			</div>
+			
+		</div>
+	</div>
+	
+
+</body>
+</html>
