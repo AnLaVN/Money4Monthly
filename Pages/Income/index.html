@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+
+
+	<div class="d-flex justify-content-center align-items-center dvh-100" ng-if="!M4M.Income.data">
+		<div class="spinner-border" style="width:5rem;height:5rem"></div>
+	</div>
+
+	<div class="container-lg" ng-controller="IncomeCtrl" ng-if="M4M.Income.data">
+		
+		<button class="btn bg-body-secondary rounded-circle border position-fixed top-0 end-0 m-3 p-0 text-center" style="height:50px;width:50px;z-index:1035" data-bs-toggle="offcanvas" data-bs-target="#IncomeFilter">
+			<i class="bi bi-funnel fs-5"></i>
+		</button>
+		<div class="offcanvas offcanvas-end" tabindex="-1" id="IncomeFilter">
+			<div class="offcanvas-header">
+				<h5>{{'m4m.filter'| translate}}</h5>
+				<button class="btn-close position-absolute top-0 end-0 m-2 fs-3" data-bs-dismiss="offcanvas"></button>
+			</div>
+			<div class="offcanvas-body">
+				<input type="search" class="form-control mt-3" role="search" placeholder="{{'m4m.search' | translate}}" ng-model="search.$">
+				<select class="form-select mt-3 mb-4" ng-model="search.wallet">
+					<option value="" selected>{{'wallet.name' | translate}}</option>
+					<option ng-repeat="wallet in M4M.Wallet.data" value="{{wallet.id}}">{{wallet.icon}}&nbsp;{{wallet.name}}</option>
+				</select>
+				<div class="p-0">{{'income.amount'| translate}}<b class="ms-2">{{result.length}}</b></div>
+				<div class="p-0">{{'income.total' | translate}}<b class="ms-2">{{getTotal(result) | currency:'':0}}&nbsp;{{getCurrency(M4M.Wallet.currency).symbol_native}}</b></div>
+				<button class="btn btn-danger mt-5 w-100" ng-click="search={}">{{'m4m.deleteFilter' | translate}}</button>
+			</div>
+		</div>
+
+		<button class="btn-GoDown position-absolute bottom-0 end-0 translate-middle" ng-init="isScrollBottom = true" ng-hide="isScrollBottom" ng-click="isScrollBottom = true">
+			<i class="bi bi-arrow-down fs-5"></i>
+		</button>
+		<div class="col-12 col-md-8 col-xl-7 mx-auto dvh-100 overflow-y-scroll custom-scroll" scroll-glue="isScrollBottom">
+			<ul class="list-group">
+				<li class="list-group-item bg-purple text-center sticky-sm-top fs-4 fs-bold">
+					{{'income.list' | translate}}<b class="ms-2">{{getTotal(M4M.Income.data) | currency:'':0}}&nbsp;{{getCurrency(M4M.Wallet.currency).symbol_native}}</b>
+				</li>
+				<div class="income-gird">
+					<li class="list-group-item income-item" ng-repeat="income in M4M.Income.data | orderBy:'time' | filter:search as result">
+						<div class="row g-2">
+							<div class="col col-sm-auto align-self-center" ng-init="hover=false" ng-mouseover="hover=true" ng-mouseleave="hover=false">
+								<div class="fs-4" ng-show="!hover">{{getWallet(income.wallet).icon}}</div>
+								<select class="form-select bg-transparent focus-ring focus-ring-0 border-0 ps-0 c-pointer" ng-model="income.wallet" ng-show="hover || !income.wallet">
+									<option class="bg-body" value="" selected disabled>{{'wallet.name' | translate}}</option>
+									<option class="bg-body" ng-repeat="wallet in M4M.Wallet.data" value="{{wallet.id}}">{{wallet.icon}}&nbsp;{{wallet.name}}</option>
+								</select>
+							</div>
+							<div class="col-12 col-sm-2 col-md col-lg-2">
+								<input type="datetime-local" class="form-control bg-transparent focus-ring focus-ring-0 border-0 px-sm-0" ng-model="income.time" ng-init="income.time = viewTime(income.time)">
+							</div>
+							<div class="col-12 col-sm col-md-auto col-lg">
+								<input type="text" class="form-control bg-transparent focus-ring focus-ring-0 border-0" placeholder="{{'m4m.content' | translate}}" maxlength="256" ng-model="income.content">
+							</div>
+							<div class="col col-sm-2 col-md col-lg-3">
+								<input type="text" class="form-control bg-transparent focus-ring focus-ring-0 border-0" placeholder="{{'m4m.price' | translate}}" pattern="^\d{1,3}(,\d{3})*(\.\d+)?$" data-type="currency" ng-model="income.price">
+							</div>
+							<div class="col-auto align-self-center">
+								<i class="bi bi-trash3 text-danger fs-6 c-pointer" ng-click="DelIncome($index)"></i>
+							</div>
+						</div>
+					</li>
+				</div>
+				<li class="list-group-item list-group-item-action text-center c-pointer" ng-click="AddIncome()">{{'m4m.add' | translate}}<i class="bi bi-plus-lg ms-2"></i></li>
+			</ul>
+			<div class="row m-0 p-0 mt-5 sticky-bottom">
+				<div class="col m-0 p-0 align-self-center">
+					{{'income.search' | translate:{s:result.length, t:M4M.Income.data.length} }}
+					<div class="form-text">{{'m4m.updatetime' | translate:{time: viewTime(M4M.Income.time)} }}</div>
+				</div>
+				<div class="col-auto m-0 p-0 align-self-center">
+					<button class="btn-Purple px-3 px-sm-5" ng-disabled="!formChanged" ng-click="SaveIncome()">{{'m4m.save' | translate}}<i class="bi bi-floppy ms-2"></i></button>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+	<script src="/Asset/Script/inputCurrecy.js"></script>
+</body>
+</html>
