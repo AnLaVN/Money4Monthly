@@ -56,12 +56,11 @@ html, body, * {
 .focus-ring-0 {
 	--bs-focus-ring-width: 0;
 }
-.bg-admin {
+.bg-purple {
 	background-color: #673fd6 !important;
 	color: var(--bs-light) !important;
 }
 /* Ẩn hộp captcha của google */
-.grecaptcha-badge {	visibility: hidden;	}
 .pattern{
 	background-image: url(/Asset/Image/Pattern.png);
 	background-position: top right;
