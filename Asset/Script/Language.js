@@ -8,11 +8,10 @@ app.config(function ($translateProvider) {
 app.factory('loadLanguages', function ($http, $q) {
 	return function (options) {
 		var deferred = $q.defer();
-		db.collection("CMaster_Languages").doc(options.key).get().then(
-			(data)=>{deferred.resolve(data.data())},
+		$http.get(`Asset/Languages/${options.key}.json`).then(
+			(res)=>{deferred.resolve(res.data)},
 			()=>{deferred.reject(options.key)}
 		);
-		
 		return deferred.promise;
 	};
 });
