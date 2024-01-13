@@ -1,12 +1,13 @@
 app.controller("CategoryCtrl", ["$scope", "$rootScope", "$timeout", "$translate", function ($scope, $rootScope, $timeout, $translate) {
 //-------------------------------------------------- Environment variable
-const firestore = {name: $translate.instant('category.name')};
+let firestore;
 $(`#Modal_Category`).off("show.bs.modal");
 $(`#Modal_Category`).on("show.bs.modal", async function () {
 	$scope.$apply(() => {
+		firestore = {name: $translate.instant('category.name')};
 		$scope.Category = angular.copy($rootScope.M4M.Category.data);
 		$scope.Category.time = angular.copy($rootScope.M4M.Category.time);
-		$timeout(() => {$scope.formChanged = false}, 10);
+		$timeout(() => $scope.formChanged = false);
 		$scope.LoadGird();
 	})
 });
@@ -44,6 +45,7 @@ $scope.LoadGird = function(){
 				});
 			});
 			$scope.Category = angular.copy(Category);
+			$scope.Category.time = angular.copy($rootScope.M4M.Category.time);
 			$scope.LoadGird();
 		}
 		$grid.off('dragItemPositioned');

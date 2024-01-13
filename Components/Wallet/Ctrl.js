@@ -1,13 +1,14 @@
 app.controller("WalletCtrl", ["$scope", "$rootScope", "$timeout", "$translate", function ($scope, $rootScope, $timeout, $translate) {
 //-------------------------------------------------- Environment variable
-const firestore = {name: $translate.instant('wallet.name')};
+let firestore;
 $(`#Modal_Wallet`).off("show.bs.modal");
 $(`#Modal_Wallet`).on("show.bs.modal", async function () {
 	$scope.$apply(() => {
+		firestore = {name: $translate.instant('wallet.name')};
 		$scope.Wallet = angular.copy($rootScope.M4M.Wallet.data);
 		$scope.Currency = angular.copy($rootScope.M4M.Wallet.currency);
 		$scope.Wallet.time = angular.copy($rootScope.M4M.Wallet.time);
-		$timeout(() => {$scope.formChanged = false}, 10);
+		$timeout(() => $scope.formChanged = false);
 		$scope.LoadGird();
 	})
 });
@@ -45,6 +46,7 @@ $scope.LoadGird = function(){
 				});
 			});
 			$scope.Wallet = angular.copy(Wallet);
+			$scope.Wallet.time = angular.copy($rootScope.M4M.Wallet.time);
 			$scope.LoadGird();
 		}
 		$grid.off('dragItemPositioned');

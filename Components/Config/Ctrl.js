@@ -1,7 +1,16 @@
-app.controller("ConfigCtrl", ["$scope", "$rootScope", "$timeout", function ($scope, $rootScope, $timeout) {
+app.controller("ConfigCtrl", ["$scope", "$rootScope", "$timeout", "$translate", function ($scope, $rootScope, $timeout, $translate) {
 //-------------------------------------------------- Environment variable
+let firestore;
 $scope.config = null;
-$scope.FirebaseConfig = M4M.FirebaseConfigExample;
+$scope.FirebaseConfig = M4M.FirebaseConfigExample;	
+$(`#Modal_Config`).off("show.bs.modal");
+$(`#Modal_Config`).on("show.bs.modal", async function () {
+	$scope.$apply(() => {
+		firestore = {name: $translate.instant('config.name')};
+		$scope.getConfig();
+		$scope.formChanged = false;
+	})
+});
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Environment variable
 
 
@@ -11,9 +20,7 @@ $scope.FirebaseConfig = M4M.FirebaseConfigExample;
 $scope.ChangeForm = () => $scope.formChanged = true;
 
 // AnLaVN - Get config firebase from local function
-$scope.getConfig = function(){
-	$scope.$apply(() => $scope.config = localStorage.getItem(M4M.FirebaseConfig) || null);
-}
+$scope.getConfig = () => $scope.config = localStorage.getItem(M4M.FirebaseConfig) || null;
 
 // AnLaVN - Set config firebase to local function
 $scope.setConfig = function(){
@@ -27,7 +34,7 @@ $scope.setUpConfig = function(){
 	if($scope.config){
 		firebase.initializeApp(JSON.parse($scope.config));	
 		M4Mfs = firebase.firestore();
-		$timeout(() => $rootScope.AddNotifis("Kết nối thành công với Firebase", "success"));
+		$timeout(() => $rootScope.AddNotifis("notifi.fs_connect_success", "success"));
 
 		for (let i in $rootScope.M4M) {
 			let fireStore = $rootScope.M4M[i].name;
@@ -40,18 +47,24 @@ $scope.setUpConfig = function(){
 			db.get().then(data => {	
 				if (data.exists) onSnapshotFireStore();
 				else db.set({...($rootScope.M4M[fireStore]), data: [], time: new Date()}).then(() => {
-					$timeout(() => {$rootScope.AddNotifis(`Khởi tạo kho lưu trữ ${fireStore} thành công.`, "success")}, 10);
+					$timeout(() => {$rootScope.AddNotifis($translate.instant('notifi.fs_create_success', firestore), "success")}, 10);
 					onSnapshotFireStore();
 				}).catch(error => {	
-					$timeout(() => {$rootScope.AddNotifis(`Không thể khởi tạo kho lưu trữ ${fireStore} !`, "danger")}, 10);
+					$timeout(() => {$rootScope.AddNotifis($translate.instant('notifi.fs_create_error', firestore), "danger")}, 10);
 					console.log(error);
 				});
 			}).catch(error => {	
-				$timeout(() => {$rootScope.AddNotifis(`Không thể truy cập kho lưu trữ ${fireStore} !`, "warning")}, 10);
+				$timeout(() => {$rootScope.AddNotifis($translate.instant('notifi.fs_access_error', firestore), "warning")}, 10);
 				console.log(error);
 			});
 		}
 	} else $timeout(() => {$('#Modal_Config').modal("show")}, 300);
+}
+
+// AnLaVN - Exit modify list Wallet
+$scope.ExitConfig = function(){
+	if(!$scope.formChanged || confirm($translate.instant('notifi.fs_ignore_confirm', firestore)))  $('#Modal_Config').modal("hide");
+	else return;
 }
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Logic function
 angular.element(() => $scope.setUpConfig());

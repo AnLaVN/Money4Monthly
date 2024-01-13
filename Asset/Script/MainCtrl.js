@@ -56,6 +56,6 @@ $rootScope.viewTime = time => time && time.seconds ? new Date(time.seconds * 100
 $rootScope.getCategory = id => $rootScope.M4M.Category.data.find(e => e.id === id);
 $rootScope.getWallet = id => $rootScope.M4M.Wallet.data.find(e => e.id === id);
 $rootScope.getCurrency = code => $rootScope.Currencys[code];
-$rootScope.getTotal = arr => arr && arr.reduce((sum, e) => sum + Number(replaceCurrency(e.price, false) || 0), 0);
+$rootScope.getTotal = arr => arr && arr.reduce((sum, e) => sum + (Number(replaceCurrency(e.price, false) || 0) * (e.category==M4M.CategoryDiscount?-1:1)), 0);
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Logic function
 }]);
