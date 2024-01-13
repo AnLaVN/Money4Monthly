@@ -8,9 +8,7 @@ $scope.FirebaseConfig = M4M.FirebaseConfigExample;
 
 //-------------------------------------------------- Logic function
 // AnLaVN - Update form changed status to [true]
-$scope.ChangeForm = function(){
-	$scope.formChanged = true;
-}
+$scope.ChangeForm = () => $scope.formChanged = true;
 
 // AnLaVN - Get config firebase from local function
 $scope.getConfig = function(){

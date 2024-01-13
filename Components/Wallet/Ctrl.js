@@ -16,9 +16,7 @@ $(`#Modal_Wallet`).on("show.bs.modal", async function () {
 
 //-------------------------------------------------- Logic function
 // AnLaVN - Update form changed status to [true]
-$scope.ChangeForm = function(){
-	$scope.formChanged = true;
-}
+$scope.ChangeForm = () => $scope.formChanged = true;
 
 // AnLaVN - Update form changed status when data of Wallet change
 $scope.$watch('Wallet', $scope.ChangeForm, true);

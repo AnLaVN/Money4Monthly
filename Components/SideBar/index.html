@@ -16,7 +16,6 @@
 			<button class="btn-close position-absolute top-0 end-0 m-2 fs-3" data-bs-dismiss="offcanvas"></button>
 		</div>
 		<div class="offcanvas-body d-flex flex-column">
-
 			<ul class="nav nav-pills flex-column">
 				<li class="nav-item">
 					<a href="#!home" class="nav-link {{isThisPage('/home')}}">
@@ -40,30 +39,29 @@
 				</li>
 				<hr class="my-3">
 				<li class="nav-item dropend">
-					<button class="btn dropdown-toggle" data-bs-toggle="dropdown">
-						<i class="bi bi-globe-asia-australia fs6 me-2"></i>{{'m4m.language' | translate}}
+					<button class="btn dropdown-toggle border-0" data-bs-toggle="dropdown">
+						<i class="bi bi-globe-asia-australia fs-6 me-2"></i>{{'m4m.language' | translate}}
 					</button>
 					<ul class="dropdown-menu">
-						<li class="dropdown-item c-pointer" ng-repeat="l in Languages" ng-click="ChangeLanguage(l.id)">{{l.icon}} {{l.name}}</li>
+						<li class="dropdown-item c-pointer" ng-repeat="l in Languages" ng-click="ChangeLanguage(l.id)">
+							<b class="me-2">{{l.icon}}</b>{{l.name}}
+						</li>
 					</ul>
 				</li>
 			</ul>
-			<hr class="mt-auto">
-			<div class="hstack dropdown">
-				<button class="btn d-flex align-items-center dropdown-toggle" data-bs-toggle="dropdown">
-					<img src="https://github.com/AnLaVN.png" width="32" height="32" class="rounded-circle me-2">
-					<strong>AnLaVN</strong>
+			<div class="hstack dropdown mt-auto">
+				<button class="btn d-flex align-items-center dropdown-toggle border-0" data-bs-toggle="dropdown">
+					<img src="https://github.com/{{Author}}.png" width="32" height="32" class="rounded-circle me-2">
+					<strong>{{Author}}</strong>
 				</button>
 				<div ng-include="'Components/ThemeToggle'" class="ms-auto"></div>
 				<ul class="dropdown-menu text-small shadow">
 					<li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#Modal_Category">{{'category.name' | translate}}</button></li>
 					<li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#Modal_Wallet">{{'wallet.name' | translate}}</button></li>
 					<li><hr class="dropdown-divider"></li>
-					
 					<li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#Modal_Config">{{'config.name' | translate}}</button></li>
 				</ul>
 			</div>
-			
 		</div>
 	</div>
 	

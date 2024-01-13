@@ -15,9 +15,7 @@ $(`#Modal_Category`).on("show.bs.modal", async function () {
 
 //-------------------------------------------------- Logic function
 // AnLaVN - Update form changed status to [true]
-$scope.ChangeForm = function(){
-	$scope.formChanged = true;
-}
+$scope.ChangeForm = () => $scope.formChanged = true;
 
 // AnLaVN - Update form changed status when data of Category change
 $scope.$watch('Category', $scope.ChangeForm, true);

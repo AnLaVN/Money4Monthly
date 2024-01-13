@@ -1,6 +1,7 @@
 app.controller("SideBarCtrl", ["$scope", "$rootScope", "$translate", function ($scope, $rootScope, $translate) {
 //-------------------------------------------------- Environment variable
 $scope.Languages = M4M.AppLanguages;
+$scope.Author = M4M.AppAuthor;
 anime({
 	targets: '#SideBarBtn',
 	autoplay: true,

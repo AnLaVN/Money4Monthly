@@ -7,9 +7,7 @@ $rootScope.AppPath = $location.path().substring($location.path().lastIndexOf("/"
 
 //-------------------------------------------------- Logic function
 // AnLaVN - Update form changed status to [true]
-$scope.ChangeForm = function(){
-	$scope.formChanged = true;
-}
+$scope.ChangeForm = () => $scope.formChanged = true;
 
 // AnLaVN - Update form changed status when data of Income change
 $scope.$watch('M4M.Income', $scope.ChangeForm, true);

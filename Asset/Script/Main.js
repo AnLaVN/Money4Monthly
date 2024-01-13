@@ -1,5 +1,6 @@
 const M4M = {
 	AppName: "M4M",
+	AppAuthor: "AnLaVN", 
 	AppTheme: "M4M_AppTheme", 
 	AppLanguages: [
 		{id: "vi_VN", icon: "🇻🇳", name: "Tiếng Việt"},
