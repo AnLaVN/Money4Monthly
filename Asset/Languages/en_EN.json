@@ -6,12 +6,12 @@
 	"m4m.language": "Language",
 	"m4m.add": "Add",
 	"m4m.save": "Save",
-	"m4m.filter": "Filter",
 	"m4m.search": "Search",
 	"m4m.updatetime": "Last updated: {{time | date:'dd/MM/yyyy - HH:mm:ss'}}",
 	"m4m.notification": "Notification",
 	"m4m.content": "Content",
 	"m4m.price": "Price",
+	"m4m.filter": "Filter",
 	"m4m.deleteFilter": "Delete Filter",
 	"config.name": "Firebase Config",
 	"category.name": "Category",
@@ -22,5 +22,9 @@
 	"income.list": "List of Incomes record",
 	"income.amount": "Amount of Incomes:",
 	"income.total": "Total Income:",
-	"income.search": "Viewing {{s}} out of {{t}} Income records"
+	"income.search": "Viewing {{s}} out of {{t}} Income records",
+	"notifi.fs_update_success": "Updated repository {{name}} successfully.",
+	"notifi.fs_update_error": "Unable to update repository {{name}} !",
+	"notifi.fs_update_duplicate": "{{name}}[{{dup}}] already exists in repository !",
+	"notifi.fs_ignore_confirm": "Changes to {{name}} will not be saved?"
 }

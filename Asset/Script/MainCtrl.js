@@ -39,10 +39,23 @@ $rootScope.LoadEmojiMenu = function(element, scope){
 	});
 }
 
+$rootScope.formatCurrency = (event) => {
+	var input = $(event.target);
+	var input_val = input.val();
+	if (input_val === "") return;
+	var original_len = input_val.length;
+	var caret_pos = input.prop("selectionStart");
+	input_val = replaceCurrency(replaceCurrency(input_val, false), true) + $rootScope.getCurrency($rootScope.M4M.Wallet.currency).symbol_native
+	input.val(input_val);
+	var updated_len = input_val.length;
+	caret_pos = updated_len - original_len + caret_pos;
+	input[0].setSelectionRange(caret_pos, caret_pos);
+}
+
 $rootScope.viewTime = time => time && time.seconds ? new Date(time.seconds * 1000) : time;
 $rootScope.getCategory = id => $rootScope.M4M.Category.data.find(e => e.id === id);
 $rootScope.getWallet = id => $rootScope.M4M.Wallet.data.find(e => e.id === id);
 $rootScope.getCurrency = code => $rootScope.Currencys[code];
-$rootScope.getTotal = arr => arr && arr.reduce((sum, e) => sum + Number(e.price || 0), 0);
+$rootScope.getTotal = arr => arr && arr.reduce((sum, e) => sum + Number(replaceCurrency(e.price, false) || 0), 0);
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Logic function
 }]);

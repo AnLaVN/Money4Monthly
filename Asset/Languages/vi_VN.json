@@ -6,12 +6,12 @@
 	"m4m.language": "Ngôn ngữ",
 	"m4m.add": "Thêm",
 	"m4m.save": "Lưu",
-	"m4m.filter": "Bộ lọc",
 	"m4m.search": "Tìm kiếm",
 	"m4m.updatetime": "Lần cập nhật gần nhất: {{time | date:'dd/MM/yyyy - HH:mm:ss'}}",
 	"m4m.notification": "Thông báo",
 	"m4m.content": "Nội dung",
 	"m4m.price": "Giá",
+	"m4m.filter": "Bộ lọc",
 	"m4m.deleteFilter": "Xoá bộ lọc",
 	"config.name": "Cấu hình Firebase",
 	"category.name": "Phân Loại",
@@ -22,5 +22,9 @@
 	"income.list": "Danh sách các khoản Thu Nhập",
 	"income.amount": "Số khoản Thu Nhập:",
 	"income.total": "Tổng Thu Nhập:",
-	"income.search": "Đang xem {{s}} trên tổng số {{t}} khoản Thu nhập"
+	"income.search": "Đang xem {{s}} trên tổng số {{t}} khoản Thu nhập",
+	"notifi.fs_update_success": "Cập nhật kho lưu trữ {{name}} thành công.",
+	"notifi.fs_update_error": "Không thể cập nhật kho lưu trữ {{name}} !",
+	"notifi.fs_update_duplicate": "Đã tồn tại {{name}}[{{dup}}] trong kho lưu trữ !",
+	"notifi.fs_ignore_confirm": "Các thay đổi về {{name}} sẽ không được lưu ?"
 }

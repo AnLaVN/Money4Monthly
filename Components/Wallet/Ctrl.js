@@ -1,5 +1,6 @@
-app.controller("WalletCtrl", ["$scope", "$rootScope", "$timeout", function ($scope, $rootScope, $timeout) {
+app.controller("WalletCtrl", ["$scope", "$rootScope", "$timeout", "$translate", function ($scope, $rootScope, $timeout, $translate) {
 //-------------------------------------------------- Environment variable
+const firestore = {name: $translate.instant('wallet.name')};
 $(`#Modal_Wallet`).off("show.bs.modal");
 $(`#Modal_Wallet`).on("show.bs.modal", async function () {
 	$scope.$apply(() => {
@@ -69,23 +70,22 @@ $scope.DelWallet = function(index){
 $scope.SaveWallet = function(){
 	let d = new Set(); let de;
 	if($scope.Wallet.some(e => (d.has(e.id) && ((de = e), true)) || (d.add(e.id), false))) {
-		$rootScope.AddNotifis(`Đã tồn tại Ví Tiền[${de.id}] trong kho lưu trữ !`, "warning");
+		$rootScope.AddNotifis($translate.instant('notifi.fs_update_duplicate', ({...firestore, dup: de.id})), "warning");
 		return false;
 	}
-	var fireStore = angular.copy($rootScope.M4M.Wallet.name);
-	var newData = {name: fireStore, data: JSON.parse(angular.toJson($scope.Wallet)), currency: $scope.Currency, time: new Date()}
-	M4Mfs.collection(M4M.AppName).doc(fireStore).set(newData).then(() => {
-		$timeout(() => {$rootScope.AddNotifis(`Cập nhật kho lưu trữ ${fireStore} thành công.`, "success")}, 10);
+	const newData = {data: angular.copy($scope.Wallet), currency: $scope.Currency, time: new Date()}
+	M4Mfs.collection(M4M.AppName).doc($rootScope.M4M.Wallet.name).update(newData).then(() => {
+		$timeout(() => {$rootScope.AddNotifis($translate.instant('notifi.fs_update_success', firestore), "success")}, 10);
 		$('#Modal_Wallet').modal('hide');
 	}).catch(error => {	
-		$timeout(() => {$rootScope.AddNotifis(`Không thể cập nhật kho lưu trữ ${fireStore} !`, "danger")}, 10);
+		$timeout(() => {$rootScope.AddNotifis($translate.instant('notifi.fs_update_error', firestore), "danger")}, 10);
 		console.log(error);
 	});
 }
 
 // AnLaVN - Exit modify list Wallet
 $scope.ExitWallet = function(){
-	if(!$scope.formChanged || confirm("Các thay đổi về Ví Tiền sẽ không được lưu ?")) $('#Modal_Wallet').modal("hide");
+	if(!$scope.formChanged || confirm($translate.instant('notifi.fs_ignore_confirm', firestore)))  $('#Modal_Wallet').modal("hide");
 	else return;
 }
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Logic function

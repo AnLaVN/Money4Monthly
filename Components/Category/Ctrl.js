@@ -1,5 +1,6 @@
-app.controller("CategoryCtrl", ["$scope", "$rootScope", "$timeout", function ($scope, $rootScope, $timeout) {
+app.controller("CategoryCtrl", ["$scope", "$rootScope", "$timeout", "$translate", function ($scope, $rootScope, $timeout, $translate) {
 //-------------------------------------------------- Environment variable
+const firestore = {name: $translate.instant('category.name')};
 $(`#Modal_Category`).off("show.bs.modal");
 $(`#Modal_Category`).on("show.bs.modal", async function () {
 	$scope.$apply(() => {
@@ -68,23 +69,22 @@ $scope.DelCategory = function(index){
 $scope.SaveCategory = function(){
 	let d = new Set(); let de;
 	if($scope.Category.some(e => (d.has(e.id) && ((de = e), true)) || (d.add(e.id), false))) {
-		$rootScope.AddNotifis(`Đã tồn tại Phân Loại[${de.id}] trong kho lưu trữ !`, "warning");
+		$rootScope.AddNotifis($translate.instant('notifi.fs_update_duplicate', ({...firestore, dup: de.id})), "warning");
 		return false;
 	}
-	var fireStore = angular.copy($rootScope.M4M.Category.name);
-	var newData = {name: fireStore, data: JSON.parse(angular.toJson($scope.Category)), time: new Date()}
-	M4Mfs.collection(M4M.AppName).doc(fireStore).set(newData).then(() => {
-		$timeout(() => {$rootScope.AddNotifis(`Cập nhật kho lưu trữ ${fireStore} thành công.`, "success")}, 10);
+	const newData = {data: angular.copy($scope.Category), time: new Date()}
+	M4Mfs.collection(M4M.AppName).doc($rootScope.M4M.Category.name).update(newData).then(() => {
+		$timeout(() => {$rootScope.AddNotifis($translate.instant('notifi.fs_update_success', firestore), "success")}, 10);
 		$('#Modal_Category').modal('hide');
 	}).catch(error => {	
-		$timeout(() => {$rootScope.AddNotifis(`Không thể cập nhật kho lưu trữ ${fireStore} !`, "danger")}, 10);
+		$timeout(() => {$rootScope.AddNotifis($translate.instant('notifi.fs_update_error', firestore), "danger")}, 10);
 		console.log(error);
 	});
 }
 
 // AnLaVN - Exit modify list Category
 $scope.ExitCategory = function(){
-	if(!$scope.formChanged || confirm("Các thay đổi về Phân Loại sẽ không được lưu ?")) $('#Modal_Category').modal("hide");
+	if(!$scope.formChanged || confirm($translate.instant('notifi.fs_ignore_confirm', firestore))) $('#Modal_Category').modal("hide");
 	else return;
 }
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Logic function

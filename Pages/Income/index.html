@@ -54,7 +54,7 @@
 								<input type="text" class="form-control bg-transparent focus-ring focus-ring-0 border-0" placeholder="{{'m4m.content' | translate}}" maxlength="256" ng-model="income.content">
 							</div>
 							<div class="col col-sm-2 col-md col-lg-3">
-								<input type="text" class="form-control bg-transparent focus-ring focus-ring-0 border-0" placeholder="{{'m4m.price' | translate}}" pattern="^\d{1,3}(,\d{3})*(\.\d+)?$" data-type="currency" ng-model="income.price">
+								<input type="text" class="form-control bg-transparent focus-ring focus-ring-0 border-0" placeholder="{{'m4m.price' | translate}}" ng-keyup="formatCurrency($event)" ng-model="income.price">
 							</div>
 							<div class="col-auto align-self-center">
 								<i class="bi bi-trash3 text-danger fs-6 c-pointer" ng-click="DelIncome($index)"></i>
@@ -78,6 +78,5 @@
 	</div>
 
 
-	<script src="/Asset/Script/inputCurrecy.js"></script>
 </body>
 </html>
