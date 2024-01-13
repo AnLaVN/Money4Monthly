@@ -20,15 +20,18 @@
 	<script src="Asset/Script/firebase-app.js"></script>
 	<script src="Asset/Script/firebase-firestore.js"></script>
 	<script src="Asset/Script/driver.js"></script>
-	<script src="Asset/Script/scrollreveal.js"></script>
+	<script src="Asset/Script/packery.js"></script>
 	<script src="Asset/Script/anime.js"></script>
 	<script src="Asset/Script/aos.js"></script>
 	<script src="Asset/Script/chart.js"></script>
     <script src="Asset/Script/emoji-mart.js"></script>
 	<script src="Asset/Script/Main.js"></script>
 	<script src="Asset/Script/MainCtrl.js"></script>
-	<!-- <script src="Asset/Script/Language.js"></script> -->
+	<script src="Asset/Script/Language.js"></script>
+	<script src="Components/SideBar/Ctrl.js"></script>
 	<script src="Components/Config/Ctrl.js"></script>
+	<script src="Components/Category/Ctrl.js"></script>
+	<script src="Components/Wallet/Ctrl.js"></script>
 	<script src="Pages/Home/Ctrl.js"></script>
 	<script src="Pages/Income/Ctrl.js"></script>
 	<script src="Pages/Sending/Ctrl.js"></script>
@@ -46,9 +49,10 @@
 	<link rel="stylesheet" href="Asset/Style/Scrollbar.css">
 	<link rel="stylesheet" href="Asset/Style/btnError.css">
 	<link rel="stylesheet" href="Asset/Style/btnPurple.css">
+	<link rel="stylesheet" href="Asset/Style/btnGoDown.css">
 	<link rel="stylesheet" href="Asset/Style/CusRadioCheckbox.css">
 </head>
-<body class="d-flex flex-column pattern" style="min-height: 100vh">
+<body class="d-flex flex-column pattern" scroll-glue="isScrollBottom">
 
 
 
@@ -76,15 +80,9 @@
 	</noscript>
 
 
-	<!-- Chèn thanh điều hướng -->
-	<!-- <div ng-include="'Components/Header/Header.html'"></div> -->
-	<!-- Giao diện -->
+	<div ng-include="'Components/Sidebar'"></div>
 	<div ng-view autoscroll></div>
-	<!-- Chèn các modal hiển thị -->
-	<div ng-include="'Components/Modal/index.html'"></div>
-	<!-- Chèn chân trang -->
-	<!-- <div ng-include="'Components/Footer/Footer.html'" class="mt-auto"></div> -->
-
+	<div ng-include="'Components/Modal'"></div>
 
 
 	<script src="Asset/Script/bootstrap-bundle.js"></script>
