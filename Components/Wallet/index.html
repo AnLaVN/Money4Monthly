@@ -1,21 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<script src="/Components/Wallet/Ctrl.js"></script>
-</head>
 <body>
 
 
-	<div class="modal fade" id="Modal_Wallet" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
-		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+	<div class="modal fade overflow-scroll custom-scroll" id="Modal_Wallet" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" ng-controller="WalletCtrl">
+		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title mx-auto fw-bold text-warning text-center">Cấu hình Firebase</h5>
+					<h5 class="modal-title mx-auto fw-bold text-center">{{'wallet.list' | translate}}</h5>
+					<button class="btn-close position-absolute top-0 end-0 m-2 fs-5" ng-click="ExitWallet()"></button>
 				</div>
-				<div class="modal-body py-0 pt-md-2 pb-md-5">
-					<textarea class="form-control bg-transparent" rows="8" oninput="auto_grow(this)" onblur="auto_grow(this)" ng-model="config" placeholder='{&#13;"apiKey": "&lt;API_KEY&gt;",&#13;"authDomain": "&lt;PROJECT_ID&gt;.firebaseapp.com",&#13;"projectId": "&lt;PROJECT_ID&gt;",&#13;"storageBucket": "&lt;PROJECT_ID&gt;.appspot.com",&#13;"messagingSenderId": "&lt;MESSAGING_ID&gt;",&#13;"appId": "&lt;APP_ID>"&#13;}'></textarea>
+				<div class="modal-body">
+					<select class="form-select mb-3" ng-model="Currency" ng-change="ChangeForm()">
+						<option value="" selected>{{'wallet.currency' | translate}}</option>
+						<option ng-repeat="currency in Currencys" value="{{currency.code}}">{{currency.name}}&nbsp;-&nbsp;{{currency.symbol_native}}</option>
+					</select>
+
+					<ul class="list-group p-0">
+						<div class="wallet-gird">
+							<li class="list-group-item list-group-item-action wallet-item" ng-repeat="wallet in Wallet track by $index">
+								<div class="row g-2">
+									<div class="col-auto align-self-center">
+										<i class="bi bi-list fs-6 c-pointer"></i>
+									</div>
+									<div class="col-3">
+										<input type="text" class="form-control bg-transparent focus-ring focus-ring-0 border-0" placeholder="ID" maxlength="16" ng-model="wallet.id">
+									</div>
+									<div class="col-auto">
+										<div class="dropend">
+											<button class="btn dropdown-toggle m-0 px-0" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside">{{wallet.icon}}</button>
+											<div class="dropdown-menu m-0 p-0" id="EmojiMenu-Wallet-{{$index}}"></div>
+										</div>
+									</div>
+									<div class="col">
+										<input type="text" class="form-control bg-transparent focus-ring focus-ring-0 border-0" placeholder="Tên" maxlength="256" ng-model="wallet.name">
+									</div>
+									<div class="col-auto align-self-center">
+										<i class="bi bi-trash3 text-danger fs-6 c-pointer" ng-click="DelWallet($index)"></i>
+									</div>
+								</div>
+							</li>
+						</div>
+						<li class="list-group-item list-group-item-action text-center c-pointer" ng-click="AddWallet()">{{'m4m.add' | translate}}&nbsp;<i class="bi bi-plus-lg ms-2"></i></li>
+					</ul>
+					<div class="form-text">{{'m4m.updatetime' | translate:{time: viewTime(Wallet.time)} }}</div>
+					<button class="btn-Purple w-100 mt-5" ng-disabled="!formChanged" ng-click="SaveWallet()">{{'m4m.save' | translate}}<i class="bi bi-floppy ms-2"></i></button>
 				</div>
-				<button class="btn-Purple m-3" ng-disabled="!config" ng-click="setConfig(config)" data-bs-dismiss="modal">Lưu</button>
 			</div>
 		</div>
 	</div>
