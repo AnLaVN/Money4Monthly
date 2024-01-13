@@ -11,11 +11,12 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title mx-auto fw-bold text-center">Cấu hình Firebase</h5>
+					<button class="btn-close position-absolute top-0 end-0 m-2 fs-5" ng-if="config" data-bs-dismiss="modal"></button>
 				</div>
 				<div class="modal-body custom-scroll">
-					<textarea class="form-control bg-transparent" rows="8" oninput="auto_grow(this)" onblur="auto_grow(this)" ng-model="config" placeholder='{&#13;"apiKey": "&lt;API_KEY&gt;",&#13;"authDomain": "&lt;PROJECT_ID&gt;.firebaseapp.com",&#13;"projectId": "&lt;PROJECT_ID&gt;",&#13;"storageBucket": "&lt;PROJECT_ID&gt;.appspot.com",&#13;"messagingSenderId": "&lt;MESSAGING_ID&gt;",&#13;"appId": "&lt;APP_ID>"&#13;}'></textarea>
+					<textarea class="form-control bg-transparent" rows="8" oninput="auto_grow(this)" onblur="auto_grow(this)" ng-model="config" placeholder='{{FirebaseConfig}}' ng-change="ChangeForm()"></textarea>
 				</div>
-				<button class="btn-Purple m-3 mt-5" ng-disabled="!config" ng-click="setConfig()" data-bs-dismiss="modal">Lưu</button>
+				<button class="btn-Purple m-3 mt-5" ng-disabled="!config || !formChanged" ng-click="setConfig()" data-bs-dismiss="modal">{{'m4m.save' | translate}}<i class="bi bi-floppy ms-2"></i></button>
 			</div>
 		</div>
 	</div>
