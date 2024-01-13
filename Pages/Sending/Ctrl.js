@@ -1,6 +1,6 @@
-app.controller("SendingCtrl", ["$scope", "$rootScope", function ($scope, $rootScope) {
+app.controller("SendingCtrl", ["$scope", "$rootScope", "$location", function ($scope, $rootScope, $location) {
 //-------------------------------------------------- Environment variable
-
+$rootScope.AppPath = $location.path().substring($location.path().lastIndexOf("/"));
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Environment variable
 
 
