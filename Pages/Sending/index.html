@@ -48,7 +48,7 @@
 				</div>
 				<div class="p-0">{{'sending.amount'| translate}}<b class="ms-2">{{result.length}}</b></div>
 				<div class="p-0">{{'sending.total' | translate}}<b class="ms-2">{{getTotal(result) | currency:'':0}}&nbsp;{{getCurrency(M4M.Wallet.currency).symbol_native}}</b></div>
-				<button class="btn btn-danger mt-5 w-100" ng-click="search={};reve=false">{{'filter.delete' | translate}}</button>
+				<button class="btn btn-danger mt-5 w-100" ng-click="search={};reve=false;sort='time'">{{'filter.delete' | translate}}</button>
 			</div>
 		</div>
 

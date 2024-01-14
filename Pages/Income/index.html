@@ -30,7 +30,7 @@
 						<i class="bi bi-sort-alpha-down{{reve?'-alt':''}} mx-2 fs-4 c-pointer" ng-init="reve = false" ng-model="reve" ng-click="reve = !reve"></i>
 					</div>
 					<div class="col">
-						<select class="form-select" ng-init="sort = 'time'" ng-model="sort">
+						<select class="form-select" ng-init="sort='time'" ng-model="sort">
 							<option value="time">{{'m4m.time' | translate}}</option>
 							<option value="content">{{'m4m.content' | translate}}</option>
 							<option value="price">{{'m4m.price' | translate}}</option>
@@ -39,7 +39,7 @@
 				</div>
 				<div class="p-0">{{'income.amount'| translate}}<b class="ms-2">{{result.length}}</b></div>
 				<div class="p-0">{{'income.total' | translate}}<b class="ms-2">{{getTotal(result) | currency:'':0}}&nbsp;{{getCurrency(M4M.Wallet.currency).symbol_native}}</b></div>
-				<button class="btn btn-danger mt-5 w-100" ng-click="search={};reve=false">{{'filter.delete' | translate}}</button>
+				<button class="btn btn-danger mt-5 w-100" ng-click="search={};reve=false;sort='time'">{{'filter.delete' | translate}}</button>
 			</div>
 		</div>
 

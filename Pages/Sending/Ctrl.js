@@ -14,8 +14,10 @@ $scope.$watch('M4M.Sending', $scope.ChangeForm, true);
 
 // AnLaVN - Add Sending to list
 $scope.AddSending = function(){
-	if($rootScope.M4M.Sending.data.every(e => e && e.wallet && e.time && e.content && e.price))  {
-		$rootScope.M4M.Sending.data.push(({...$rootScope.M4M.Sending.data.slice(-1)[0], content: "", price: 0}));
+	if($rootScope.M4M.Sending.data.every(e => e && e.category && e.wallet && e.time && e.content && e.price))  {
+		let last = angular.copy($rootScope.M4M.Sending.data.slice(-1)[0]);
+		last.time = $rootScope.viewTime(last.time).getDate() == new Date().getDate() ? last.time : new Date();
+		$rootScope.M4M.Sending.data.push(({...last, content: "", price: 0}));
 	};
 }
 

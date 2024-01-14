@@ -15,7 +15,9 @@ $scope.$watch('M4M.Income', $scope.ChangeForm, true);
 // AnLaVN - Add Income to list
 $scope.AddIncome = function(){
 	if($rootScope.M4M.Income.data.every(e => e && e.wallet && e.time && e.content && e.price))  {
-		$rootScope.M4M.Income.data.push(({...$rootScope.M4M.Income.data.slice(-1)[0], content: "", price: 0}));
+		let last = angular.copy($rootScope.M4M.Income.data.slice(-1)[0]);
+		last.time = $rootScope.viewTime(last.time).getDate() == new Date().getDate() ? last.time : new Date();
+		$rootScope.M4M.Income.data.push(({...last, content: "", price: 0}));
 	};
 }
 

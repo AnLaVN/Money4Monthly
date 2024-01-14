@@ -15,6 +15,11 @@ const replaceCurrency = (input, add) => {
 	if (typeof input !== 'string') input = input.toString();
 	return add ? input.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : input.replace(/\D/g, "");
 }
+const decodeEntity = inputStr => {
+	var textarea = document.createElement('textarea');
+	textarea.innerHTML = inputStr;
+	return textarea.value;
+}
 var M4Mfs;
 var app = angular.module("M4M", ["ngRoute", "luegg.directives", "ngCookies", "pascalprecht.translate", "ngSanitize"]);
 app.config(['$compileProvider', function ($compileProvider) {

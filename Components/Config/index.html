@@ -11,7 +11,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title mx-auto fw-bold text-center">{{'config.name' | translate}}</h5>
-					<button class="btn-close position-absolute top-0 end-0 m-2 fs-5" ng-click="ExitConfig()"></button>
+					<button class="btn-close position-absolute top-0 end-0 m-2 fs-5" ng-show="config" ng-click="ExitConfig()"></button>
 				</div>
 				<div class="modal-body custom-scroll">
 					<textarea class="form-control bg-transparent" rows="8" oninput="auto_grow(this)" onblur="auto_grow(this)" ng-model="config" placeholder='{{FirebaseConfig}}' ng-change="ChangeForm()"></textarea>
