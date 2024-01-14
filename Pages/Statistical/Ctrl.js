@@ -1,7 +1,7 @@
 app.controller("StatisticalCtrl", ["$scope", "$rootScope", "$location", "$timeout", "$filter", "$translate", function ($scope, $rootScope, $location, $timeout, $filter, $translate) {
 //-------------------------------------------------- Environment variable
 $rootScope.AppPath = $location.path().substring($location.path().lastIndexOf("/"));
-$scope.Statistical = {name: "income", groupBy: "day"}
+$scope.Statistical = {name: "sending", groupBy: "day"}
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Environment variable
 
 

@@ -1,4 +1,4 @@
-app.controller("SendingCtrl", ["$scope", "$rootScope", "$location", "$timeout", "$translate", function ($scope, $rootScope, $location, $timeout, $translate) {
+app.controller("SendingCtrl", ["$scope", "$rootScope", "$location", "$timeout", "$filter", "$translate", function ($scope, $rootScope, $location, $timeout, $filter, $translate) {
 //-------------------------------------------------- Environment variable
 $rootScope.AppPath = $location.path().substring($location.path().lastIndexOf("/"));
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Environment variable
@@ -27,7 +27,7 @@ $scope.DelSending = index => $rootScope.M4M.Sending.data.splice(index, 1);
 // AnLaVN - Save list Sending to Firestore
 $scope.SaveSending = function(){
 	const firestore = {name: $translate.instant('sending.name')};
-	const newData = {data: angular.copy($rootScope.M4M.Sending.data.map(e => ({...e, price: Number(replaceCurrency(e.price || 0, false))}) )), time: new Date()};
+	const newData = {data: angular.copy($filter('orderBy')($rootScope.M4M.Sending.data, "time").map(e => ({...e, price: Number(replaceCurrency(e.price || 0, false))}) )), time: new Date()};
 	M4Mfs.collection(M4M.AppName).doc($rootScope.M4M.Sending.name).update(newData).then(() => {
 		$timeout(() => {$rootScope.AddNotifis($translate.instant('notifi.fs_update_success', firestore), "success")}, 10);
 		$scope.formChanged = false;

@@ -1,4 +1,4 @@
-app.controller("IncomeCtrl", ["$scope", "$rootScope", "$location", "$timeout", "$translate", function ($scope, $rootScope, $location, $timeout, $translate) {
+app.controller("IncomeCtrl", ["$scope", "$rootScope", "$location", "$timeout", "$filter", "$translate", function ($scope, $rootScope, $location, $timeout, $filter, $translate) {
 //-------------------------------------------------- Environment variable
 $rootScope.AppPath = $location.path().substring($location.path().lastIndexOf("/"));
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Environment variable
@@ -27,7 +27,7 @@ $scope.DelIncome = index => $rootScope.M4M.Income.data.splice(index, 1);
 // AnLaVN - Save list Income to Firestore
 $scope.SaveIncome = function(){
 	const firestore = {name: $translate.instant('income.name')};
-	const newData = {data: angular.copy($rootScope.M4M.Income.data.map(e => ({...e, price: Number(replaceCurrency(e.price || 0, false))}) )), time: new Date()};
+	const newData = {data: angular.copy($filter('orderBy')($rootScope.M4M.Income.data, "time").map(e => ({...e, price: Number(replaceCurrency(e.price || 0, false))}) )), time: new Date()};
 	M4Mfs.collection(M4M.AppName).doc($rootScope.M4M.Income.name).update(newData).then(() => {
 		$timeout(() => {$rootScope.AddNotifis($translate.instant('notifi.fs_update_success', firestore), "success")}, 10);
 		$scope.formChanged = false;

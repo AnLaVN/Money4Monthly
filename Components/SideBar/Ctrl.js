@@ -1,4 +1,4 @@
-app.controller("SideBarCtrl", ["$scope", "$rootScope", "$translate", function ($scope, $rootScope, $translate) {
+app.controller("SideBarCtrl", ["$scope", "$rootScope", "$timeout", "$translate", function ($scope, $rootScope, $timeout, $translate) {
 //-------------------------------------------------- Environment variable
 $scope.Languages = M4M.AppLanguages;
 $scope.Author = M4M.AppAuthor;
@@ -17,6 +17,7 @@ anime({
 //-------------------------------------------------- Logic function
 $scope.ChangeLanguage = id => $translate.use(id);
 $scope.isThisPage = link => link == $rootScope.AppPath ? "active" : "link-body-emphasis";
+$scope.closeSideBar = () => $timeout(() => {$('[data-bs-toggle="offcanvas"]').click()}, 100);
 
 // AnLaVN - Change Theme to dark/light
 $scope.ThemeToggle = function(){

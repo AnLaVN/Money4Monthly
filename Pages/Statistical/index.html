@@ -7,18 +7,18 @@
 		<div class="spinner-border" style="width:5rem;height:5rem"></div>
 	</div>
 	<div class="container-lg" ng-controller="StatisticalCtrl" ng-if="M4M.Income.data && M4M.Sending.data">
-		<canvas id="Statistical-Chart" ng-init="drawChart()"></canvas>
+		<canvas id="Statistical-Chart"></canvas>
 
-		<div class="hstack justify-content-center gap-3 mt-3">
-			<div class="col-auto">{{'statistical.name' | translate}}</div>
-			<div class="col-auto">
+		<div class="row row-cols-2 row-cols-sm-4 justify-content-center align-items-center" ng-init="drawChart()">
+			<div class="col text-end">{{'statistical.name' | translate}}</div>
+			<div class="col">
 				<select class="form-select" ng-model="Statistical.name" ng-change="drawChart()">
 					<option value="income">{{'income.name' | translate}}</option>
 					<option value="sending">{{'sending.name' | translate}}</option>
 				</select>
 			</div>
-			<div class="col-auto ms-5">{{'filter.groupBy' | translate}}</div>
-			<div class="col-auto">
+			<div class="col text-end">{{'filter.groupBy' | translate}}</div>
+			<div class="col">
 				<select class="form-select" ng-model="Statistical.groupBy" ng-change="drawChart()">
 					<option value="day">{{'filter.day' | translate}}</option>
 					<option value="month">{{'filter.month' | translate}}</option>
@@ -27,8 +27,6 @@
 			</div>
 		</div>
 
-
-		
 	</div>
 
 
