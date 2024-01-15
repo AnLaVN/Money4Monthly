@@ -34,6 +34,7 @@
 	"sending.total": "Tổng Chi Tiêu:",
 	"sending.search": "Đang xem {{s}} trên tổng số {{t}} khoản Chi Tiêu",
 	"statistical.name": "Thống Kê",
+	"statistical.residual": "Dư",
 	"notifi.fs_connect_success": "Kết nối thành công với kho lưu trữ Firebase.",
 	"notifi.fs_create_success": "Khởi tạo kho lưu trữ {{name}} thành công.",
 	"notifi.fs_create_error": "Không thể khởi tạo kho lưu trữ {{name}} !",

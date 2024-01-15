@@ -34,6 +34,7 @@
 	"sending.total": "Total Sending:",
 	"sending.search": "Viewing {{s}} out of {{t}} Sending records",
 	"statistical.name": "Statistical",
+	"statistical.residual": "Residual",
 	"notifi.fs_connect_success": "Successfully connected to Firebase repository.",
 	"notifi.fs_create_success": "Initialization of repository {{name}} succeeded.",
 	"notifi.fs_create_error": "Unable to initialize repository {{name}} !",
