@@ -9,6 +9,7 @@
 	"m4m.content": "Content",
 	"m4m.price": "Price",
 	"m4m.time": "Time",
+	"m4m.default": "Default",
 	"filter.name": "Filter",
 	"filter.sortBy": "Sort by",
 	"filter.filterBy": "Filter by",

@@ -30,7 +30,8 @@
 						<i class="bi bi-sort-alpha-down{{reve?'-alt':''}} mx-2 fs-4 c-pointer" ng-init="reve = false" ng-model="reve" ng-click="reve = !reve"></i>
 					</div>
 					<div class="col">
-						<select class="form-select" ng-init="sort='time'" ng-model="sort">
+						<select class="form-select" ng-init="sort" ng-model="sort">
+							<option value="">{{'m4m.default' | translate}}</option>
 							<option value="time">{{'m4m.time' | translate}}</option>
 							<option value="content">{{'m4m.content' | translate}}</option>
 							<option value="price">{{'m4m.price' | translate}}</option>

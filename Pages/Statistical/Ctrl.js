@@ -28,15 +28,18 @@ function getGroupByCategory(arr, groupBy){
 	let data = arr.filter(e => e.category === groupBy);
 	return data ? Math.abs($rootScope.getTotal(data)) : 0;
 }
-$scope.drawChart = function(){
+function drawChart(config){
 	let oldChart = Chart.getChart("Statistical-Chart");
 	if (oldChart != undefined) oldChart.destroy();
+	new Chart(document.getElementById("Statistical-Chart").getContext("2d"), config);
+}
 
+$scope.isLoadedData = () => $rootScope.M4M.Income.data && $rootScope.M4M.Sending.data;
+$scope.drawChartMonthly = function(){
 	let income = getGroupBy($rootScope.M4M.Income.data, "month");
 	let sending = getGroupBy($rootScope.M4M.Sending.data, "month");
 	let residual = income.map(i => ({...i, total: i.total - sending.find(s => s.time.seconds == i.time.seconds).total }) );
-
-	new Chart(document.getElementById("Statistical-Chart").getContext("2d"), {
+	const config = {
 		type: 'bar',
 		data: {
 			labels: residual.map(e => $filter('date')(e.time)),
@@ -49,27 +52,17 @@ $scope.drawChart = function(){
 				backgroundColor: M4M.ChartColor[0]+'33',
 				borderColor: M4M.ChartColor[0],
 				borderWidth: 2,
-				stack: 'Income',
 			}, {
-				type: 'line',
+				type: 'bar',
 				label: $translate.instant("sending.name"),
 				data: sending.map(e => e.total),
-				pointRadius: 10,
-				pointHoverRadius: 20,
-				backgroundColor: M4M.ChartColor[1]+'33',
-				borderColor: M4M.ChartColor[1],
-				borderWidth: 2,
-				stack: 'Sending',
-			}, 
-			...$rootScope.M4M.Category.data.map((c, index)=> ({
-				label: c.name,
-				data: sending.map(e => getGroupByCategory(e.data, c.id)),
 				maxBarThickness: 100,
 				backgroundColor: M4M.ChartColor[1]+'33',
 				borderColor: M4M.ChartColor[1],
 				borderWidth: 2,
 				stack: 'Sending-Residual',
-			})), {
+			}, {
+				type: 'bar',
 				label: $translate.instant("statistical.residual"),
 				data: residual.map(e => e.total),
 				maxBarThickness: 100,
@@ -77,7 +70,17 @@ $scope.drawChart = function(){
 				borderColor: M4M.ChartColor[2],
 				borderWidth: 2,
 				stack: 'Sending-Residual',
-			}]
+			},
+			...$rootScope.M4M.Category.data.map((c, index) => ({
+				type: 'line',
+				label: c.icon + ' ' + c.name,
+				data: sending.map(e => getGroupByCategory(e.data, c.id)),
+				pointRadius: 10,
+				pointHoverRadius: 20,
+				backgroundColor: M4M.ChartColor[index+3]+'33',
+				borderColor: M4M.ChartColor[index+3],
+				borderWidth: 2,
+			}))]
 		},
 		options: {
 			scales: {
@@ -86,7 +89,8 @@ $scope.drawChart = function(){
 				}
 			}
 		}
-	});
+	}
+	drawChart(config);
 }
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Logic function
 }]);
