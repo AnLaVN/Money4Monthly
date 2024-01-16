@@ -1,12 +1,10 @@
 app.controller("ConfigCtrl", ["$scope", "$rootScope", "$timeout", "$translate", function ($scope, $rootScope, $timeout, $translate) {
 //-------------------------------------------------- Environment variable
-let firestore;
 $scope.config = null;
 $scope.FirebaseConfig = decodeEntity(M4M.FirebaseConfigExample);
 $(`#Modal_Config`).off("show.bs.modal");
 $(`#Modal_Config`).on("show.bs.modal", async function () {
 	$scope.$apply(() => {
-		firestore = {name: $translate.instant('config.name')};
 		$scope.getConfig();
 		$scope.formChanged = false;
 	})
@@ -38,23 +36,22 @@ $scope.setUpConfig = function(){
 
 		for (let i in $rootScope.M4M) {
 			let fireStore = $rootScope.M4M[i].name;
+			let fireName = {name: $translate.instant(fireStore.toLowerCase() + ".name")};
 			let db = M4Mfs.collection(M4M.AppName).doc(fireStore);
 			function onSnapshotFireStore(){
-				db.onSnapshot(newData => {
-					$scope.$apply(() => $rootScope.M4M[fireStore] = newData.data())
-				});
+				db.onSnapshot(newData => $scope.$apply(() => $rootScope.M4M[fireStore] = newData.data()));
 			}
 			db.get().then(data => {	
 				if (data.exists) onSnapshotFireStore();
 				else db.set({...($rootScope.M4M[fireStore]), data: [], time: new Date()}).then(() => {
-					$timeout(() => {$rootScope.AddNotifis($translate.instant('notifi.fs_create_success', firestore), "success")}, 10);
+					$timeout(() => {$rootScope.AddNotifis($translate.instant('notifi.fs_create_success', fireName), "success")}, 10);
 					onSnapshotFireStore();
 				}).catch(error => {	
-					$timeout(() => {$rootScope.AddNotifis($translate.instant('notifi.fs_create_error', firestore), "danger")}, 10);
+					$timeout(() => {$rootScope.AddNotifis($translate.instant('notifi.fs_create_error', fireName), "danger")}, 10);
 					console.log(error);
 				});
 			}).catch(error => {	
-				$timeout(() => {$rootScope.AddNotifis($translate.instant('notifi.fs_access_error', firestore), "warning")}, 10);
+				$timeout(() => {$rootScope.AddNotifis($translate.instant('notifi.fs_access_error', fireName), "warning")}, 10);
 				console.log(error);
 			});
 		}
@@ -63,7 +60,7 @@ $scope.setUpConfig = function(){
 
 // AnLaVN - Exit modify list Wallet
 $scope.ExitConfig = function(){
-	if(!$scope.formChanged || confirm($translate.instant('notifi.fs_ignore_confirm', firestore)))  $('#Modal_Config').modal("hide");
+	if(!$scope.formChanged || confirm($translate.instant('notifi.fs_ignore_confirm', {name: $translate.instant('config.name')})))  $('#Modal_Config').modal("hide");
 	else return;
 }
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Logic function

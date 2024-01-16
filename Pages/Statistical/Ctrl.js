@@ -31,6 +31,7 @@ function getGroupByCategory(arr, groupBy){
 function drawChart(config){
 	let oldChart = Chart.getChart("Statistical-Chart");
 	if (oldChart != undefined) oldChart.destroy();
+	Chart.defaults.font.family = 'Dosis';
 	new Chart(document.getElementById("Statistical-Chart").getContext("2d"), config);
 }
 
@@ -38,7 +39,7 @@ $scope.isLoadedData = () => $rootScope.M4M.Income.data && $rootScope.M4M.Sending
 $scope.drawChartMonthly = function(){
 	let income = getGroupBy($rootScope.M4M.Income.data, "month");
 	let sending = getGroupBy($rootScope.M4M.Sending.data, "month");
-	let residual = income.map(i => ({...i, total: i.total - sending.find(s => s.time.seconds == i.time.seconds).total }) );
+	let residual = income.map((i, index) => ({...i, total: i.total - sending[index].total }) );
 	const config = {
 		type: 'bar',
 		data: {
@@ -75,14 +76,17 @@ $scope.drawChartMonthly = function(){
 				type: 'line',
 				label: c.icon + ' ' + c.name,
 				data: sending.map(e => getGroupByCategory(e.data, c.id)),
+				hidden: true,
 				pointRadius: 10,
 				pointHoverRadius: 20,
 				backgroundColor: M4M.ChartColor[index+3]+'33',
 				borderColor: M4M.ChartColor[index+3],
 				borderWidth: 2,
-			}))]
+			}))
+		]
 		},
 		options: {
+			maintainAspectRatio: false,
 			scales: {
 				x: {
 					stacked: true

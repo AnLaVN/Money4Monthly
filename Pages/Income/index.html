@@ -7,7 +7,7 @@
 		<div class="spinner-border" style="width:5rem;height:5rem"></div>
 	</div>
 
-	<div class="container-lg" ng-controller="IncomeCtrl" ng-if="M4M.Income.data">
+	<div class="dvh-100 overflow-y-scroll custom-scroll" ng-controller="IncomeCtrl" ng-if="M4M.Income.data" scroll-glue="isScrollBottom">
 		
 		<div class="dropdown">
 			<button class="btn bg-body-secondary rounded-circle border position-fixed top-0 end-0 m-3 p-0 text-center" style="height:3rem;width:3rem;z-index:1035" data-bs-toggle="dropdown" data-bs-auto-close="outside">
@@ -40,14 +40,14 @@
 				</div>
 				<div class="p-0">{{'income.amount'| translate}}<b class="ms-2">{{result.length}}</b></div>
 				<div class="p-0">{{'income.total' | translate}}<b class="ms-2">{{getTotal(result) | currency:'':0}}&nbsp;{{getCurrency(M4M.Wallet.currency).symbol_native}}</b></div>
-				<button class="btn btn-danger mt-5 w-100" ng-click="search={};reve=false;sort='time'">{{'filter.delete' | translate}}</button>
+				<button class="btn btn-danger mt-5 w-100" ng-click="search={};reve=false;sort=''">{{'filter.delete' | translate}}</button>
 			</div>
 		</div>
 
 		<button class="btn-GoDown position-absolute bottom-0 end-0 translate-middle" style="z-index:1035" ng-init="isScrollBottom = true" ng-hide="isScrollBottom" ng-click="isScrollBottom = true">
 			<i class="bi bi-arrow-down fs-5"></i>
 		</button>
-		<div class="col-12 col-md-8 col-xl-7 mx-auto dvh-100 overflow-y-scroll custom-scroll" scroll-glue="isScrollBottom">
+		<div class="col-12 col-md-8 col-lg-7 col-xl-6 mx-auto">
 			<ul class="list-group">
 				<li class="list-group-item bg-purple text-center sticky-sm-top fs-4 fs-bold">
 					{{'income.list' | translate}}<b class="ms-2">{{getTotal(M4M.Income.data) | currency:'':0}}&nbsp;{{getCurrency(M4M.Wallet.currency).symbol_native}}</b>

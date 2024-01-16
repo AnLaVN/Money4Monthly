@@ -6,27 +6,8 @@
 	<div class="d-flex justify-content-center align-items-center dvh-100" ng-if="!isLoadedData()">
 		<div class="spinner-border" style="width:5rem;height:5rem"></div>
 	</div>
-	<div class="container-lg" ng-controller="StatisticalCtrl" ng-if="isLoadedData()" ng-init="drawChartMonthly()">
+	<div class="container-lg dvh-100" ng-controller="StatisticalCtrl" ng-if="isLoadedData()" ng-init="drawChartMonthly()">
 		<canvas id="Statistical-Chart"></canvas>
-
-		<div class="row row-cols-2 row-cols-sm-4 justify-content-center align-items-center">
-			<div class="col text-end">{{'statistical.name' | translate}}</div>
-			<div class="col">
-				<select class="form-select" ng-model="Statistical.name" ng-change="drawChart()">
-					<option value="income">{{'income.name' | translate}}</option>
-					<option value="sending">{{'sending.name' | translate}}</option>
-				</select>
-			</div>
-			<div class="col text-end">{{'filter.groupBy' | translate}}</div>
-			<div class="col">
-				<select class="form-select" ng-model="Statistical.groupBy" ng-change="drawChart()">
-					<option value="day">{{'filter.day' | translate}}</option>
-					<option value="month">{{'filter.month' | translate}}</option>
-					<option value="year">{{'filter.year' | translate}}</option>
-				</select>
-			</div>
-		</div>
-
 	</div>
 
 
