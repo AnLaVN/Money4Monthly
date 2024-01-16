@@ -37,7 +37,7 @@ html, body{
 	-moz-user-select: none; /* Firefox 2+ */
 	-ms-user-select: none; /* IE 10+ */
 	user-select: none; /* Standard syntax */
-	background: url(http://salehriaz.com/404Page/img/bg_purple.png);
+	background: url(/Pages/Error/image/bg_purple.png);
 	background-repeat: repeat-x;
 	background-size: cover;
 	background-position: left top;
@@ -101,7 +101,7 @@ html, body{
 }
 
 .stars{
-	background: url(http://salehriaz.com/404Page/img/overlay_stars.svg);
+	background: url(/Pages/Error/image/overlay_stars.svg);
 	background-repeat: repeat;
 	background-size: contain;
 	background-position: left top;
