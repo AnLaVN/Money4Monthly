@@ -35,10 +35,10 @@ function drawChart(config){
 	new Chart(document.getElementById("Statistical-Chart").getContext("2d"), config);
 }
 
-$scope.isLoadedData = () => $rootScope.M4M.Income.data && $rootScope.M4M.Sending.data;
+$scope.isLoadedData = () => $rootScope.M4M.Income.data && $rootScope.M4M.Spends.data;
 $scope.drawChartMonthly = function(){
 	let income = getGroupBy($rootScope.M4M.Income.data, "month");
-	let spends = getGroupBy($rootScope.M4M.Sending.data, "month");
+	let spends = getGroupBy($rootScope.M4M.Spends.data, "month");
 	let residual = income.map((i, index) => ({...i, total: i.total - spends[index].total }) );
 	const config = {
 		type: 'bar',
@@ -61,7 +61,7 @@ $scope.drawChartMonthly = function(){
 				backgroundColor: M4M.ChartColor[1]+'33',
 				borderColor: M4M.ChartColor[1],
 				borderWidth: 2,
-				stack: 'Sending-Residual',
+				stack: 'Spends-Residual',
 			}, {
 				type: 'bar',
 				label: $translate.instant("statistical.residual"),
@@ -70,7 +70,7 @@ $scope.drawChartMonthly = function(){
 				backgroundColor: M4M.ChartColor[2]+'33',
 				borderColor: M4M.ChartColor[2],
 				borderWidth: 2,
-				stack: 'Sending-Residual',
+				stack: 'Spends-Residual',
 			},
 			...$rootScope.M4M.Category.data.map((c, index) => ({
 				type: 'line',
