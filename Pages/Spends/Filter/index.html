@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+
+
+    <div class="dropdown">
+        <button class="btn bg-body-secondary rounded-circle border position-fixed top-0 end-0 m-3 p-0 text-center" style="height:3rem;width:3rem;z-index:1035" data-bs-toggle="dropdown" data-bs-auto-close="outside">
+            <i class="bi bi-funnel fs-5"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-end p-3" style="width:18rem; z-index:1060">
+            <input type="search" class="form-control" role="search" placeholder="{{'m4m.search' | translate}}" ng-model="$parent.search.$">
+            <div class="hstack mt-3">
+                <div class="col">{{'filter.filterBy' | translate}}</div>
+                <div class="col">
+                    <select class="form-select" ng-model="$parent.search.category">
+                        <option value="" selected>{{'category.name' | translate}}</option>
+                        <option ng-repeat="category in M4M.Category.data" value="{{category.id}}">{{category.icon}}&nbsp;{{category.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="hstack mt-3">
+                <div class="col">{{'filter.filterBy' | translate}}</div>
+                <div class="col">
+                    <select class="form-select" ng-model="$parent.search.wallet">
+                        <option value="" selected>{{'wallet.name' | translate}}</option>
+                        <option ng-repeat="wallet in M4M.Wallet.data" value="{{wallet.id}}">{{wallet.icon}}&nbsp;{{wallet.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="hstack mt-3 mb-4">
+                <div class="col">{{'filter.sortBy' | translate}}</div>
+                <div class="col-auto">
+                    <i class="bi bi-sort-alpha-down{{reve?'-alt':''}} mx-2 fs-4 c-pointer" ng-init="$parent.reve=false" ng-model="$parent.reve" ng-click="$parent.reve=!$parent.reve"></i>
+                </div>
+                <div class="col">
+                    <select class="form-select" ng-model="$parent.sort">
+                        <option value="">{{'m4m.default' | translate}}</option>
+                        <option value="time">{{'m4m.time' | translate}}</option>
+                        <option value="content">{{'m4m.content' | translate}}</option>
+                        <option value="price">{{'m4m.price' | translate}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="p-0">{{'sending.amount'| translate}}<b class="ms-2">{{result.length}}</b></div>
+            <div class="p-0">{{'sending.total' | translate}}<b class="ms-2">{{getTotal(result) | currency:'':0}}&nbsp;{{getCurrency(M4M.Wallet.currency).symbol_native}}</b></div>
+            <button class="btn btn-danger mt-5 w-100" ng-click="$parent.search={};$parent.reve=false;$parent.sort=''">{{'filter.delete' | translate}}</button>
+        </div>
+    </div>
+
+
+</body>
+</html>

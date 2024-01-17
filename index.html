@@ -16,6 +16,7 @@
 	<script src="Asset/Script/angular-translate-storage-cookie.js"></script>
 	<script src="Asset/Script/angular-translate-storage-local.js"></script>
 	<script src="Asset/Script/angular-translate-loader-url.js"></script>
+	<script src="Asset/Script/angular-infinite-scroll.js"></script>
 	<script src="Asset/Script/scrollglue.js"></script>
 	<script src="Asset/Script/firebase-app.js"></script>
 	<script src="Asset/Script/firebase-firestore.js"></script>
@@ -34,7 +35,7 @@
 	<script src="Components/Wallet/Ctrl.js"></script>
 	<script src="Pages/Home/Ctrl.js"></script>
 	<script src="Pages/Income/Ctrl.js"></script>
-	<script src="Pages/Sending/Ctrl.js"></script>
+	<script src="Pages/Spends/Ctrl.js"></script>
 	<script src="Pages/Statistical/Ctrl.js"></script>
 	<script src="Asset/Script/Route.js"></script>
 	<title>Money for Monthly | M4M</title>
@@ -56,7 +57,7 @@
 
 
 	<noscript>
-		<meta http-equiv="refresh" content="10"><!-- Tự động load lại trang sau 10s -->
+		<meta http-equiv="refresh" content="10">
 		<div class="position-relative vh-100 bg-dark pattern text-light">
 			<div class="position-absolute top-50 start-50 translate-middle text-center w-100 p-2">
 				<p class="h3 pb-2 text-danger">Không thể sử dụng dịch vụ Javascript</p>
@@ -84,6 +85,6 @@
 
 
 	<script src="Asset/Script/bootstrap-bundle.js"></script>
-	<script>AOS.init();</script>
+	<script>AOS.init()</script>
 </body>
 </html>

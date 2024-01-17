@@ -2,7 +2,7 @@ app.controller("MainCtrl", ["$scope", "$rootScope", "$http", "$timeout", functio
 //-------------------------------------------------- Environment variable
 $rootScope.AppTheme = localStorage.getItem(M4M.AppTheme) || 'dark';
 $scope.Notifis = [];
-$rootScope.M4M = {Wallet:{name:"Wallet"}, Category:{name:"Category"}, Income:{name:"Income"}, Sending:{name:"Sending"}};
+$rootScope.M4M = {Wallet:{name:"Wallet"}, Category:{name:"Category"}, Income:{name:"Income"}, Spends:{name:"Spends"}};
 $http.get(M4M.Currency).then(res => $rootScope.Currencys = res.data);
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Environment variable
 

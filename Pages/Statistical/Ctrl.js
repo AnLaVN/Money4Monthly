@@ -1,7 +1,7 @@
 app.controller("StatisticalCtrl", ["$scope", "$rootScope", "$location", "$timeout", "$filter", "$translate", function ($scope, $rootScope, $location, $timeout, $filter, $translate) {
 //-------------------------------------------------- Environment variable
 $rootScope.AppPath = $location.path().substring($location.path().lastIndexOf("/"));
-$scope.Statistical = {name: "sending", groupBy: "day"}
+$scope.Statistical = {name: "spends", groupBy: "day"}
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Environment variable
 
 
@@ -38,8 +38,8 @@ function drawChart(config){
 $scope.isLoadedData = () => $rootScope.M4M.Income.data && $rootScope.M4M.Sending.data;
 $scope.drawChartMonthly = function(){
 	let income = getGroupBy($rootScope.M4M.Income.data, "month");
-	let sending = getGroupBy($rootScope.M4M.Sending.data, "month");
-	let residual = income.map((i, index) => ({...i, total: i.total - sending[index].total }) );
+	let spends = getGroupBy($rootScope.M4M.Sending.data, "month");
+	let residual = income.map((i, index) => ({...i, total: i.total - spends[index].total }) );
 	const config = {
 		type: 'bar',
 		data: {
@@ -55,8 +55,8 @@ $scope.drawChartMonthly = function(){
 				borderWidth: 2,
 			}, {
 				type: 'bar',
-				label: $translate.instant("sending.name"),
-				data: sending.map(e => e.total),
+				label: $translate.instant("spends.name"),
+				data: spends.map(e => e.total),
 				maxBarThickness: 100,
 				backgroundColor: M4M.ChartColor[1]+'33',
 				borderColor: M4M.ChartColor[1],
@@ -75,7 +75,7 @@ $scope.drawChartMonthly = function(){
 			...$rootScope.M4M.Category.data.map((c, index) => ({
 				type: 'line',
 				label: c.icon + ' ' + c.name,
-				data: sending.map(e => getGroupByCategory(e.data, c.id)),
+				data: spends.map(e => getGroupByCategory(e.data, c.id)),
 				hidden: true,
 				pointRadius: 10,
 				pointHoverRadius: 20,

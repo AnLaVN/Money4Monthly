@@ -40,7 +40,7 @@ const decodeEntity = inputStr => {
 }
 const isDiscount = id => id == M4M.CategoryDiscount ? -1 : 1;
 var M4Mfs;
-var app = angular.module("M4M", ["ngRoute", "luegg.directives", "ngCookies", "pascalprecht.translate", "ngSanitize"]);
+var app = angular.module("M4M", ["ngRoute", "luegg.directives", "ngCookies", "pascalprecht.translate", "ngSanitize", "infinite-scroll"]);
 app.config(['$compileProvider', function ($compileProvider) {
 	$compileProvider.debugInfoEnabled(false);
 }]);

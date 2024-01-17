@@ -8,8 +8,8 @@ app.config(function ($routeProvider) {
 			templateUrl: "Pages/Income/index.html",
 			controller: "IncomeCtrl"
 		})
-		.when("/sending", { // Trang chi tiêu
-			templateUrl: "Pages/Sending/index.html",
+		.when("/spends", { // Trang chi tiêu
+			templateUrl: "Pages/Spends/index.html",
 			controller: "IncomeCtrl"
 		})
 		.when("/statistical", { // Trang thống kê
