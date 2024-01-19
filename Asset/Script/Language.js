@@ -1,5 +1,5 @@
 app.config(function ($translateProvider) {
-	$translateProvider.preferredLanguage('vi_VN');
+	$translateProvider.preferredLanguage('en_EN');
 	$translateProvider.useLoader('loadLanguages');
 	$translateProvider.useLocalStorage();
 	$translateProvider.useSanitizeValueStrategy('escape');
