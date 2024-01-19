@@ -6,7 +6,7 @@
 	<div class="d-flex justify-content-center align-items-center dvh-100" ng-if="!isLoadedData()">
 		<div class="spinner-border" style="width:5rem;height:5rem"></div>
 	</div>
-	<div class="container-lg dvh-100" ng-controller="StatisticalCtrl" ng-if="isLoadedData()" ng-init="drawChartMonthly()">
+	<div class="container-lg dvh-100" ng-if="isLoadedData()" ng-init="drawChartMonthly()">
 		<canvas id="Statistical-Chart"></canvas>
 	</div>
 

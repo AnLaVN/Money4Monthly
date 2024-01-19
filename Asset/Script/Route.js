@@ -10,7 +10,7 @@ app.config(function ($routeProvider) {
 		})
 		.when("/spends", { // Trang chi tiêu
 			templateUrl: "Pages/Spends/index.html",
-			controller: "IncomeCtrl"
+			controller: "SpendsCtrl"
 		})
 		.when("/statistical", { // Trang thống kê
 			templateUrl: "Pages/Statistical/index.html",

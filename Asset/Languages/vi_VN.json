@@ -29,6 +29,7 @@
 	"income.amount": "Số khoản Thu Nhập:",
 	"income.total": "Tổng Thu Nhập:",
 	"income.search": "Đang xem {{s}} trên tổng số {{t}} khoản Thu nhập",
+	"income.outdata": "Không còn khoản Thu nhập nào",
 	"spends.name": "Chi Tiêu",
 	"spends.list": "Danh sách các khoản Chi Tiêu",
 	"spends.amount": "Số khoản Chi Tiêu:",

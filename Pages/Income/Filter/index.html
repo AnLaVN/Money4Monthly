@@ -12,15 +12,6 @@
 			<div class="hstack mt-3">
 				<div class="col">{{'filter.filterBy' | translate}}</div>
 				<div class="col">
-					<select class="form-select" ng-model="$parent.search.category">
-						<option value="" selected>{{'category.name' | translate}}</option>
-						<option ng-repeat="category in M4M.Category.data" value="{{category.id}}">{{category.icon}}&nbsp;{{category.name}}</option>
-					</select>
-				</div>
-			</div>
-			<div class="hstack mt-3">
-				<div class="col">{{'filter.filterBy' | translate}}</div>
-				<div class="col">
 					<select class="form-select" ng-model="$parent.search.wallet">
 						<option value="" selected>{{'wallet.name' | translate}}</option>
 						<option ng-repeat="wallet in M4M.Wallet.data" value="{{wallet.id}}">{{wallet.icon}}&nbsp;{{wallet.name}}</option>
@@ -30,7 +21,7 @@
 			<div class="hstack mt-3 mb-4">
 				<div class="col">{{'filter.sortBy' | translate}}</div>
 				<div class="col-auto">
-					<i class="bi bi-sort-alpha-down{{reve?'-alt':''}} mx-2 fs-4 c-pointer" ng-init="$parent.reve=false" ng-model="$parent.reve" ng-click="$parent.reve=!$parent.reve"></i>
+					<i class="bi bi-sort-alpha-down{{reve?'-alt':''}} mx-2 fs-4 c-pointer" ng-init="$parent.reve=false" ng-model="$parent.reve" ng-click="$parent.reve = !$parent.reve"></i>
 				</div>
 				<div class="col">
 					<select class="form-select" ng-model="$parent.sort">
@@ -41,8 +32,8 @@
 					</select>
 				</div>
 			</div>
-			<div class="p-0">{{'spends.amount'| translate}}<b class="ms-2">{{result.length}}</b></div>
-			<div class="p-0">{{'spends.total' | translate}}<b class="ms-2">{{getTotal(result) | currency:'':0}}&nbsp;{{getCurrency(M4M.Wallet.currency).symbol_native}}</b></div>
+			<div class="p-0">{{'income.amount'| translate}}<b class="ms-2">{{result.length}}</b></div>
+			<div class="p-0">{{'income.total' | translate}}<b class="ms-2">{{getTotal(result) | currency:'':0}}&nbsp;{{getCurrency(M4M.Wallet.currency).symbol_native}}</b></div>
 			<button class="btn btn-danger mt-5 w-100" ng-click="$parent.search={};$parent.reve=false;$parent.sort=''">{{'filter.delete' | translate}}</button>
 		</div>
 	</div>

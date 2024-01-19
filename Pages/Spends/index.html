@@ -2,68 +2,66 @@
 <html lang="en">
 <body>
 
+	
+	<div ng-include="'Components/Loading'" ng-if="!M4M.Spends.data"></div>
+	<div ng-include="'Components/ScrollTop'"></div>
 
-	<div ng-controller="SpendsCtrl">
-		<div class="d-flex justify-content-center align-items-center dvh-100" ng-if="!M4M.Spends.data">
-			<div class="spinner-border" style="width:5rem;height:5rem"></div>
-		</div>
-	
-		<div class="dvh-100 overflow-y-scroll custom-scroll" infinite-scroll="LoadSpends()">
-			
-			<div ng-include="'Pages/Spends/Filter'"></div>
-	
-			<div class="col-12 col-md-8 col-lg-7 col-xl-6 mx-auto" ng-if="M4M.Spends.data" ng-init="LoadSpends()">
-				<ul class="list-group">
-					<li class="list-group-item bg-purple text-center sticky-sm-top fs-4 fs-bold">
-						{{'spends.list' | translate}}<b class="ms-2">{{getTotal(M4M.Spends.data) | currency:'':0}}&nbsp;{{getCurrency(M4M.Wallet.currency).symbol_native}}</b>
-					</li>
-					<li class="list-group-item list-group-item-action text-center c-pointer" ng-click="AddSpends()">{{'m4m.add' | translate}}<i class="bi bi-plus-lg ms-2"></i></li>
-					<div class="spends-gird">
-						<li class="list-group-item spends-item" ng-repeat="spends in Spends | orderBy: sort : reve | filter:search as result track by $index">
-							<div class="row g-2">
-								<div class="col col-sm-auto align-self-center" ng-init="CateHover=false" ng-click="CateHover=true" ng-mouseover="CateHover=true" ng-mouseleave="CateHover=false">
-									<div class="fs-4" ng-show="!CateHover">{{getCategory(spends.category).icon}}</div>
-									<select class="form-select bg-transparent focus-ring focus-ring-0 border-0 ps-0 c-pointer" ng-model="spends.category" ng-show="CateHover || !spends.category">
-										<option class="bg-body" value="" selected disabled>{{'category.name' | translate}}</option>
-										<option class="bg-body" ng-repeat="category in M4M.Category.data" value="{{category.id}}">{{category.icon}}&nbsp;{{category.name}}</option>
-									</select>
-								</div>
-								<div class="col col-sm-auto align-self-center" ng-init="WaleHover=false" ng-click="WaleHover=true" ng-mouseover="WaleHover=true" ng-mouseleave="WaleHover=false">
-									<div class="fs-4" ng-show="!WaleHover">{{getWallet(spends.wallet).icon}}</div>
-									<select class="form-select bg-transparent focus-ring focus-ring-0 border-0 ps-0 c-pointer" ng-model="spends.wallet" ng-show="WaleHover || !spends.wallet">
-										<option class="bg-body" value="" selected disabled>{{'wallet.name' | translate}}</option>
-										<option class="bg-body" ng-repeat="wallet in M4M.Wallet.data" value="{{wallet.id}}">{{wallet.icon}}&nbsp;{{wallet.name}}</option>
-									</select>
-								</div>
-								<div class="col-12 col-sm-2 col-md col-lg-2">
-									<input type="datetime-local" class="form-control bg-transparent focus-ring focus-ring-0 border-0 px-sm-0" ng-model="spends.time" ng-init="spends.time = viewTime(spends.time)">
-								</div>
-								<div class="col-12 col-sm col-md-auto col-lg">
-									<input type="text" class="form-control bg-transparent focus-ring focus-ring-0 border-0" placeholder="{{'m4m.content' | translate}}" maxlength="256" ng-model="spends.content">
-								</div>
-								<div class="col col-sm-2 col-md col-lg-3">
-									<input type="text" class="form-control bg-transparent focus-ring focus-ring-0 border-0" placeholder="{{'m4m.price' | translate}}" ng-keyup="formatCurrency($event)" ng-model="spends.price">
-								</div>
-								<div class="col-auto align-self-center">
-									<i class="bi bi-trash3 text-danger fs-6 c-pointer" ng-click="DelSpends($index)"></i>
-								</div>
+	<div ng-if="M4M.Spends.data" infinite-scroll="LoadMoreData()">
+		<div ng-include="'Pages/Spends/Filter'"></div>
+
+		<div class="col-12 col-md-8 col-lg-7 col-xl-6 mx-auto">
+			<ul class="list-group">
+				<li class="list-group-item bg-purple text-center fs-4 fs-bold">
+					{{'spends.list' | translate}}<b class="ms-2">{{getTotal(M4M.Spends.data) | currency:'':0}}&nbsp;{{getCurrency(M4M.Wallet.currency).symbol_native}}</b>
+				</li>
+				<li class="list-group-item list-group-item-action text-center c-pointer sticky-sm-top" ng-click="AddSpends()">
+					{{'m4m.add' | translate}}<i class="bi bi-plus-lg ms-2"></i>
+				</li>
+				<div class="spends-gird">
+					<li class="list-group-item spends-item" ng-repeat="spends in Spends | orderBy: sort : reve | filter:search as result track by $index">
+						<div class="row g-2">
+							<div class="col col-sm-auto align-self-center" ng-init="CateHover=false" ng-click="CateHover=true" ng-mouseover="CateHover=true" ng-mouseleave="CateHover=false">
+								<div class="fs-4" ng-show="!CateHover">{{getCategory(spends.category).icon}}</div>
+								<select class="form-select bg-transparent focus-ring focus-ring-0 border-0 ps-0 c-pointer" ng-model="spends.category" ng-change="Change(spends)" ng-show="CateHover || !spends.category">
+									<option class="bg-body" value="" selected disabled>{{'category.name' | translate}}</option>
+									<option class="bg-body" ng-repeat="category in M4M.Category.data" value="{{category.id}}">{{category.icon}}&nbsp;{{category.name}}</option>
+								</select>
 							</div>
-						</li>
-					</div>
-					<li class="list-group-item bg-purple">{{'spends.outdata' | translate}}</li>
-				</ul>
-				<div class="row m-0 p-0 mt-5 sticky-bottom">
-					<div class="col m-0 p-0 align-self-center">
-						{{'spends.search' | translate:{s:result.length, t:M4M.Spends.data.length} }}
-						<div class="form-text">{{'m4m.updatetime' | translate:{time: viewTime(M4M.Spends.time)} }}</div>
-					</div>
-					<div class="col-auto m-0 p-0 align-self-center">
-						<button class="btn-Purple px-3 px-sm-5" ng-disabled="!formChanged" ng-click="SaveSpends()">{{'m4m.save' | translate}}<i class="bi bi-floppy ms-2"></i></button>
-					</div>
+							<div class="col col-sm-auto align-self-center" ng-init="WaleHover=false" ng-click="WaleHover=true" ng-mouseover="WaleHover=true" ng-mouseleave="WaleHover=false">
+								<div class="fs-4" ng-show="!WaleHover">{{getWallet(spends.wallet).icon}}</div>
+								<select class="form-select bg-transparent focus-ring focus-ring-0 border-0 ps-0 c-pointer" ng-model="spends.wallet" ng-change="Change(spends)" ng-show="WaleHover || !spends.wallet">
+									<option class="bg-body" value="" selected disabled>{{'wallet.name' | translate}}</option>
+									<option class="bg-body" ng-repeat="wallet in M4M.Wallet.data" value="{{wallet.id}}">{{wallet.icon}}&nbsp;{{wallet.name}}</option>
+								</select>
+							</div>
+							<div class="col-12 col-sm-2 col-md col-lg-2">
+								<input type="datetime-local" class="form-control bg-transparent focus-ring focus-ring-0 border-0 px-sm-0" ng-model="spends.time" ng-change="Change(spends)" ng-init="spends.time = viewTime(spends.time)">
+							</div>
+							<div class="col-12 col-sm col-md-auto col-lg">
+								<input type="text" class="form-control bg-transparent focus-ring focus-ring-0 border-0" placeholder="{{'m4m.content' | translate}}" maxlength="256" ng-model="spends.content" ng-change="Change(spends)">
+							</div>
+							<div class="col col-sm-2 col-md col-lg-3">
+								<input type="text" class="form-control bg-transparent focus-ring focus-ring-0 border-0" placeholder="{{'m4m.price' | translate}}" ng-keyup="formatCurrency($event)" ng-model="spends.price" ng-change="Change(spends)">
+							</div>
+							<div class="col-auto align-self-center">
+								<i class="bi bi-trash3 text-danger fs-6 c-pointer" ng-click="DelSpends($index)"></i>
+							</div>
+						</div>
+					</li>
+				</div>
+				<li class="list-group-item bg-purple" ng-if="Spends.length >= M4M.Spends.data.length">{{'spends.outdata' | translate}}</li>
+			</ul>
+			<div class="row m-0 p-0 mt-5 sticky-bottom">
+				<div class="col m-0 p-0 align-self-center">
+					{{'spends.search' | translate:{s:result.length, t:M4M.Spends.data.length} }}
+					<div class="form-text">{{'m4m.updatetime' | translate:{time: viewTime(M4M.Spends.time)} }}</div>
+				</div>
+				<div class="col-auto m-0 p-0 align-self-center">
+					<button class="btn-Purple px-3 px-sm-5" ng-disabled="!formChanged" ng-click="SaveSpends()">{{'m4m.save' | translate}}<i class="bi bi-floppy ms-2"></i></button>
 				</div>
 			</div>
-	
 		</div>
+
 	</div>
 
 
