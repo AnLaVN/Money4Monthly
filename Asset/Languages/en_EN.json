@@ -45,5 +45,6 @@
 	"notifi.fs_update_success": "Updated repository {{name}} successfully.",
 	"notifi.fs_update_error": "Unable to update repository {{name}} !",
 	"notifi.fs_update_duplicate": "{{name}}[{{dup}}] already exists in repository !",
+	"notify.fs duplicate delete": "Unable to delete {{name}}[{{dup}}] because it's in use in repository !",
 	"notifi.fs_ignore_confirm": "Changes to {{name}} will not be saved?"
 }

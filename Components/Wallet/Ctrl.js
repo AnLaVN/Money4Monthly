@@ -64,8 +64,13 @@ $scope.AddWallet = function(){
 
 // AnLaVN - Delete Wallet from list
 $scope.DelWallet = function(index){
-	$scope.Wallet.splice(index, 1);
-	$scope.LoadGird();
+	const id = $scope.Wallet[index].id
+	if($rootScope.M4M.Income.data.some(e => e.wallet == id) || $rootScope.M4M.Spends.data.some(e => e.wallet == id)) 
+		$rootScope.AddNotifis($translate.instant('notifi.fs_delete_duplicate', ({...firestore, dup: id})), "warning");
+	else {
+		$scope.Wallet.splice(index, 1);
+		$scope.LoadGird();
+	}
 }
 
 // AnLaVN - Save list Wallet to Firestore

@@ -63,8 +63,13 @@ $scope.AddCategory = function(){
 
 // AnLaVN - Delete Category from list
 $scope.DelCategory = function(index){
-	$scope.Category.splice(index, 1);
-	$scope.LoadGird();
+	const id = $scope.Category[index].id
+	if($rootScope.M4M.Spends.data.some(e => e.category == id)) 
+		$rootScope.AddNotifis($translate.instant('notifi.fs_delete_duplicate', ({...firestore, dup: id})), "warning");
+	else {
+		$scope.Category.splice(index, 1);
+		$scope.LoadGird();
+	}
 }
 
 // AnLaVN - Save list Category to Firestore

@@ -2,6 +2,7 @@ app.controller("SpendsCtrl", ["$scope", "$rootScope", "$location", "$timeout", "
 //-------------------------------------------------- Environment variable
 $rootScope.AppPath = $location.path().substring($location.path().lastIndexOf("/"));
 $scope.Spends = [];
+let firestore = {name: $translate.instant('spends.name')};
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Environment variable
 
 
@@ -44,7 +45,7 @@ $scope.DelSpends = index => {
 
 // AnLaVN - Save list Spends to Firestore
 $scope.SaveSpends = function(){
-	const firestore = {name: $translate.instant('spends.name')};
+	firestore = {name: $translate.instant('spends.name')};
 	const changedData = $scope.Spends.filter(e => e.changed);
 	const newData = {
 		time: new Date(),
