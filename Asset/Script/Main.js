@@ -2,21 +2,21 @@ const M4M = {
 	AppName: "M4M",
 	AppAuthor: "AnLaVN", 
 	AppTheme: "M4M_AppTheme", 
-	CategoryDiscount: "GiamGia",
 	AppLanguages: [
 		{id: "vi_VN", icon: "🇻🇳", name: "Tiếng Việt"},
 		{id: "en_EN", icon: "🇺🇲", name: "English"}
 	],
-	FirebaseRow: 20,
+	TutorialConfig: "M4M_TutorialConfig",
 	FirebaseConfig: "M4M_FirebaseConfig",
 	FirebaseConfigExample: '{&#13;"apiKey": "&lt;API_KEY&gt;",&#13;"authDomain": "&lt;PROJECT_ID&gt;.firebaseapp.com",&#13;"projectId": "&lt;PROJECT_ID&gt;",&#13;"storageBucket": "&lt;PROJECT_ID&gt;.appspot.com",&#13;"messagingSenderId": "&lt;MESSAGING_ID&gt;",&#13;"appId": "&lt;APP_ID>"&#13;}',
+	FirebaseRow: 20,
+	CategoryDiscount: "GiamGia",
 	Currency: "https://gist.githubusercontent.com/ksafranski/2973986/raw/Common-Currency.json",
 	ChartColor: [
 		'#36a2eb',
 		'#ff6384',
 		'#38d86e',
 		'#4c5cb4',
-		// '#a5b8d7',
 		'#ce85ee',
 		'#71a177',
 		'#c08557',
@@ -28,6 +28,7 @@ const M4M = {
 		'#9966ff',
 		'#ff9f40',
 		'#4bc0c0',
+		'#a5b8d7',
 	]
 }
 const uid = () => Date.now().toString(36) + Math.random().toString(36).substring(2);

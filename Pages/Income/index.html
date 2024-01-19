@@ -6,7 +6,7 @@
 	<div ng-include="'Components/Loading'" ng-if="!M4M.Income.data"></div>
 	<div ng-include="'Components/ScrollTop'"></div>
 
-	<div ng-if="M4M.Income.data" infinite-scroll="LoadMoreData()">
+	<div ng-if="M4M.Income.data" ng-init="LoadTutorial()" infinite-scroll="LoadMoreData()">
 		<div ng-include="'Pages/Spends/Filter'"></div>
 
 		<div class="col-12 col-md-8 col-lg-7 col-xl-6 mx-auto">

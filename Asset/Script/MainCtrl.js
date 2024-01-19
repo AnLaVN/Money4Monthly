@@ -1,4 +1,4 @@
-app.controller("MainCtrl", ["$scope", "$rootScope", "$http", "$timeout", function ($scope, $rootScope, $http, $timeout) {
+app.controller("MainCtrl", ["$scope", "$rootScope", "$http", "$timeout", "$translate", function ($scope, $rootScope, $http, $timeout, $translate) {
 //-------------------------------------------------- Environment variable
 $rootScope.AppTheme = localStorage.getItem(M4M.AppTheme) || 'dark';
 $scope.Notifis = [];
@@ -9,17 +9,16 @@ $http.get(M4M.Currency).then(res => $rootScope.Currencys = res.data);
 
 
 //-------------------------------------------------- Logic function
-
-// AnLaVN - Hàm thêm thông báo
-$rootScope.AddNotifis = function(content, color){
-	var notifi = { content: content, color: color, time: new Date() };	// Tạo thông báo
-	$scope.Notifis.push(notifi);				// Thêm thông báo vào danh sách
+// AnLaVN - Add notifications
+$rootScope.AddNotifis = (content, color) => {
+	var notifi = { content: content, color: color, time: new Date() };
+	$scope.Notifis.push(notifi);
 	$timeout(()=>{new bootstrap.Toast(document.getElementById(`Notifi${notifi.time.getTime()}`)).show()});
-	$timeout(()=>{$scope.Notifis.shift()},10000);// Lên lịch xoá thông báo sau 10s
+	$timeout(()=>{$scope.Notifis.shift()},10000);
 }
 
-// AnLaVN - Load menu biểu tượng cảm xúc
-$rootScope.LoadEmojiMenu = function(element, scope){
+// AnLaVN - Load emoji menu
+$rootScope.LoadEmojiMenu = (element, scope) => {
 	const AvailableLanguages = ["en", "ar", "be", "cs", "de", "es", "fa", "fi", "fr", "hi", "it", "ja", "kr", "nl", "pl", "pt", "ru", "sa", "tr", "uk", "vi", "zh"];
 	const BrowserLanguage = (navigator.language || navigator.userLanguage).slice(0, 2);
 	const EmojiLanguage = AvailableLanguages.includes(BrowserLanguage) ? BrowserLanguage : "en";
@@ -39,6 +38,7 @@ $rootScope.LoadEmojiMenu = function(element, scope){
 	});
 }
 
+// AnLaVN - Format input to currency
 $rootScope.formatCurrency = (event) => {
 	var input = $(event.target);
 	var input_val = input.val();
@@ -50,6 +50,27 @@ $rootScope.formatCurrency = (event) => {
 	var updated_len = input_val.length;
 	caret_pos = updated_len - original_len + caret_pos;
 	input[0].setSelectionRange(caret_pos, caret_pos);
+}
+
+$rootScope.Tutorial = (isView, scope, steps) => {
+	let tutorial = localStorage.getItem(M4M.TutorialConfig);
+	tutorial = tutorial ? JSON.parse(tutorial) : {};
+	if(isView || !tutorial[scope]){
+		tutorial[scope] = true;
+		if ($("#ScrollTop").length) steps.push({element: '#ScrollTop', popover: {title: $translate.instant("tutorial.scrolltop_title"), description: $translate.instant("tutorial.scrolltop_descr"), side: "left", align: 'center'}})
+		localStorage.setItem(M4M.TutorialConfig, JSON.stringify(tutorial));
+		const driver = window.driver.js.driver;
+		const driverObj = driver({
+			// allowClose: false,
+			showProgress: true,
+			progressText: "{{current}} / {{total}}",
+			prevBtnText: $translate.instant("tutorial.prev"),
+			nextBtnText: $translate.instant("tutorial.next"),
+			doneBtnText: $translate.instant("tutorial.finish"),
+			steps: steps
+		});
+		driverObj.drive();
+	}
 }
 
 $rootScope.viewTime = time => time && time.seconds ? new Date(time.seconds * 1000) : time;

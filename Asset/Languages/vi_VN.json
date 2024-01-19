@@ -46,5 +46,18 @@
 	"notifi.fs_update_error": "Không thể cập nhật kho lưu trữ {{name}} !",
 	"notifi.fs_update_duplicate": "Đã tồn tại {{name}}[{{dup}}] trong kho lưu trữ !",
 	"notifi.fs_delete_duplicate": "Không thể xoá {{name}}[{{dup}}] vì đang được dùng trong kho lưu trữ !",
-	"notifi.fs_ignore_confirm": "Các thay đổi về {{name}} sẽ không được lưu ?"
+	"notifi.fs_ignore_confirm": "Các thay đổi về {{name}} sẽ không được lưu ?",
+	"tutorial.name": "Hướng dẫn",
+	"tutorial.prev": "Trước",
+	"tutorial.next": "Tiếp",
+	"tutorial.finish": "Hoàn thành",
+	"tutorial.scrolltop_title": "Nút Cuộn lên trên",
+	"tutorial.scrolltop_descr": "Cuộn trở về đầu trang",
+	"tutorial.header_descr": "Hiển thị {{name}} và tổng tất cả số tiền.",
+	"tutorial.btn_add_title": "Nút thêm",
+	"tutorial.btn_add_descr": "Thêm một bản ghi vào {{name}}.",
+	"tutorial.list_descr": "Hiển thị {{name}} và chi tiết cho từng bản ghi.",
+	"tutorial.btn_save_title": "Nút lưu",
+	"tutorial.btn_save_descr": "Sắp xếp và lưu tất cả bản ghi vào kho lưu trữ.",
+	"tutorial.filter_descr": "Hiển thị menu lọc giúp tìm kiếm và lọc những bản ghi phù hợp. Đồng thời tính tổng tiền các bản ghi đã lọc."
 }

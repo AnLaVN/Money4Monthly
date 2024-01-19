@@ -46,5 +46,18 @@
 	"notifi.fs_update_error": "Unable to update repository {{name}} !",
 	"notifi.fs_update_duplicate": "{{name}}[{{dup}}] already exists in repository !",
 	"notify.fs duplicate delete": "Unable to delete {{name}}[{{dup}}] because it's in use in repository !",
-	"notifi.fs_ignore_confirm": "Changes to {{name}} will not be saved?"
+	"notifi.fs_ignore_confirm": "Changes to {{name}} will not be saved?",
+	"tutorial.name": "Tutorial",
+	"tutorial.prev": "Previous",
+	"tutorial.next": "Next",
+	"tutorial.finish": "Finish",
+	"tutorial.scrolltop_title": "Scroll Top button",
+	"tutorial.scrolltop_descr": "Scroll back to top page",
+	"tutorial.header_descr": "Display {{name}} and total amount.",
+	"tutorial.btn_add_title": "Button add",
+	"tutorial.btn_add_descr": "Add one record to {{name}}.",
+	"tutorial.list_descr": "Display {{name}} and detail for each records.",
+	"tutorial.btn_save_title": "Button save",
+	"tutorial.btn_save_descr": "Sort and save all records to repository.",
+	"tutorial.filter_descr": "Displays the filter menu to help search and filter suitable records. At the same time, calculate the total amount of filtered records."
 }

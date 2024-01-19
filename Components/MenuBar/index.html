@@ -48,6 +48,23 @@
 						</li>
 					</ul>
 				</li>
+				<li class="nav-item dropend">
+					<button class="btn dropdown-toggle border-0" data-bs-toggle="dropdown">
+						<i class="bi bi-info-circle fs-6 me-2"></i>{{'tutorial.name' | translate}}
+					</button>
+					<ul class="dropdown-menu">
+						<li>
+							<a class="dropdown-item" href="#!income?tutorial" ng-click="closeSideBar()">
+								<i class="bi bi-cash-coin fs-6 me-2"></i>{{'income.name' | translate}}
+							</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="#!spends?tutorial" ng-click="closeSideBar()">
+								<i class="bi bi-cash-stack fs-6 me-2"></i>{{'spends.name' | translate}}
+							</a>
+						</li>
+					</ul>
+				</li>
 			</ul>
 			<div class="hstack dropdown mt-auto">
 				<button class="btn d-flex align-items-center dropdown-toggle border-0" data-bs-toggle="dropdown">
