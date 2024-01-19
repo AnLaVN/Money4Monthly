@@ -1,4 +1,4 @@
-firebase.json
 .firebaserc
 .firebase
-.google*.*
+firebase.json
+google*.html
