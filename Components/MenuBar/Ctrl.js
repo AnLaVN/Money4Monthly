@@ -1,9 +1,9 @@
-app.controller("SideBarCtrl", ["$scope", "$rootScope", "$timeout", "$translate", function ($scope, $rootScope, $timeout, $translate) {
+app.controller("MenuBarCtrl", ["$scope", "$rootScope", "$timeout", "$translate", function ($scope, $rootScope, $timeout, $translate) {
 //-------------------------------------------------- Environment variable
 $scope.Languages = M4M.AppLanguages;
 $scope.Author = M4M.AppAuthor;
 anime({
-	targets: '#SideBarBtn',
+	targets: '#MenuBarBtn',
 	autoplay: true,
 	translateY: 30,
 	direction: 'alternate',
@@ -17,10 +17,10 @@ anime({
 //-------------------------------------------------- Logic function
 $scope.ChangeLanguage = id => $translate.use(id);
 $scope.isThisPage = link => link == $rootScope.AppPath ? "active" : "link-body-emphasis";
-$scope.closeSideBar = () => $timeout(() => {$('[data-bs-toggle="offcanvas"]').click()}, 100);
+$scope.closeMenuBar = () => $timeout(() => {$('[data-bs-toggle="offcanvas"]').click()}, 100);
 
 // AnLaVN - Change Theme to dark/light
-$scope.ThemeToggle = function(){
+$scope.ThemeToggle = () => {
 	const BUTTON = document.getElementById("ThemeToggle");
 	BUTTON.setAttribute("aria-pressed", $rootScope.AppTheme == "dark");
 	BUTTON.addEventListener("click", () => {

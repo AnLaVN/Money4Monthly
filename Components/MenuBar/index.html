@@ -3,12 +3,12 @@
 <body>
 
 
-	<button type="button" id="SideBarBtn" class="btn bg-body-secondary rounded-circle border position-fixed top-0 start-0 m-3 p-0 text-center" 
-		style="height:3rem;width:3rem;z-index:1035" data-bs-toggle="offcanvas" data-bs-target="#SideBar">
+	<button type="button" id="MenuBarBtn" class="btn bg-body-secondary rounded-circle border position-fixed top-0 start-0 m-3 p-0 text-center" 
+		style="height:3rem;width:3rem;z-index:1035" data-bs-toggle="offcanvas" data-bs-target="#MenuBar">
 		<i class="bi bi-list-ul fs-5"></i>
 	</button>
 
-	<div class="offcanvas offcanvas-start" tabindex="-1" id="SideBar" ng-controller="SideBarCtrl">
+	<div class="offcanvas offcanvas-start" tabindex="-1" id="MenuBar" ng-controller="MenuBarCtrl">
 		<div class="offcanvas-header">
 			<a href="#!home" class="mb-3 mb-md-0">
 				<img class="img-fluid col-5" src="/Asset/Image/m4m-high-resolution-logo-transparent.png" alt="M4M Logo">
@@ -18,22 +18,22 @@
 		<div class="offcanvas-body d-flex flex-column">
 			<ul class="nav nav-pills flex-column">
 				<li class="nav-item">
-					<a href="#!home" class="nav-link {{isThisPage('/home')}}" ng-click="closeSideBar()">
+					<a href="#!home" class="nav-link {{isThisPage('/home')}}" ng-click="closeMenuBar()">
 						<i class="bi bi-house fs-6 me-2"></i>{{'m4m.home' | translate}}
 					</a>
 				</li>
 				<li class="nav-item">
-					<a href="#!income" class="nav-link {{isThisPage('/income')}}" ng-click="closeSideBar()">
+					<a href="#!income" class="nav-link {{isThisPage('/income')}}" ng-click="closeMenuBar()">
 						<i class="bi bi-cash-coin fs-6 me-2"></i>{{'income.name' | translate}}
 					</a>
 				</li>
 				<li class="nav-item">
-					<a href="#!spends" class="nav-link {{isThisPage('/spends')}}" ng-click="closeSideBar()">
+					<a href="#!spends" class="nav-link {{isThisPage('/spends')}}" ng-click="closeMenuBar()">
 						<i class="bi bi-cash-stack fs-6 me-2"></i>{{'spends.name' | translate}}
 					</a>
 				</li>
 				<li class="nav-item">
-					<a href="#!statistical" class="nav-link {{isThisPage('/statistical')}}" ng-click="closeSideBar()">
+					<a href="#!statistical" class="nav-link {{isThisPage('/statistical')}}" ng-click="closeMenuBar()">
 						<i class="bi bi-graph-up fs-6 me-2"></i>{{'statistical.name' | translate}}
 					</a>
 				</li>
@@ -54,12 +54,12 @@
 					</button>
 					<ul class="dropdown-menu">
 						<li>
-							<a class="dropdown-item" href="#!income?tutorial" ng-click="closeSideBar()">
+							<a class="dropdown-item" href="#!income?tutorial" ng-click="closeMenuBar()">
 								<i class="bi bi-cash-coin fs-6 me-2"></i>{{'income.name' | translate}}
 							</a>
 						</li>
 						<li>
-							<a class="dropdown-item" href="#!spends?tutorial" ng-click="closeSideBar()">
+							<a class="dropdown-item" href="#!spends?tutorial" ng-click="closeMenuBar()">
 								<i class="bi bi-cash-stack fs-6 me-2"></i>{{'spends.name' | translate}}
 							</a>
 						</li>
