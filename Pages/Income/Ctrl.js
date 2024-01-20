@@ -20,7 +20,7 @@ $scope.ChangeForm = () => $scope.formChanged = true;
 $scope.Change = e => e.changed = true;
 
 // AnLaVN - Update form changed status when data of Income change
-$scope.$watch('M4M.Income', $scope.ChangeForm, true);
+$scope.$watch('Income', $scope.ChangeForm, true);
 
 // AnLaVN - Load tutorial
 $scope.LoadTutorial = () => $rootScope.Tutorial($routeParams.tutorial, $rootScope.M4M.Income.name, TutorialSteps);
