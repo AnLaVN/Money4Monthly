@@ -50,9 +50,9 @@ $scope.AddSpends = () => {
 }
 
 // AnLaVN - Delete Spends from list
-$scope.DelSpends = index => {
-	$scope.Spends.splice(index, 1);
-	$rootScope.M4M.Spends.data.splice(index, 1);
+$scope.DelSpends = id => {
+	$scope.Spends.splice($scope.Spends.findIndex(e => e.id == id), 1);
+	$rootScope.M4M.Spends.data.splice($rootScope.M4M.Spends.data.findIndex(e => e.id == id), 1);
 }
 
 // AnLaVN - Save list Spends to Firestore

@@ -44,7 +44,7 @@
 								<input type="text" class="form-control bg-transparent focus-ring focus-ring-0 border-0" placeholder="{{'m4m.price' | translate}}" ng-keyup="formatCurrency($event)" ng-model="spends.price" ng-change="Change(spends)">
 							</div>
 							<div class="col-auto align-self-center">
-								<i class="bi bi-trash3 text-danger fs-6 c-pointer" ng-click="DelSpends($index)"></i>
+								<i class="bi bi-trash3 text-danger fs-6 c-pointer" ng-click="DelSpends(spends.id)"></i>
 							</div>
 						</div>
 					</li>

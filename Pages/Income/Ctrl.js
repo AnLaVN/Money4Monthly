@@ -50,9 +50,9 @@ $scope.AddIncome = () => {
 }
 
 // AnLaVN - Delete Income from list
-$scope.DelIncome = index => {
-	$scope.Income.splice(index, 1);
-	$rootScope.M4M.Income.data.splice(index, 1);
+$scope.DelIncome = id => {
+	$scope.Income.splice($scope.Income.findIndex(e => e.id == id), 1);
+	$rootScope.M4M.Income.data.splice($rootScope.M4M.Income.data.findIndex(e => e.id == id), 1);
 }
 
 // AnLaVN - Save list Income to Firestore
