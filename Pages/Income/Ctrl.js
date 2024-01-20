@@ -30,8 +30,9 @@ let index = 0
 $scope.LoadMoreData = () => {
 	var isChanged = $scope.formChanged;
 	$scope.Income = $scope.Income.concat($rootScope.M4M.Income.data.slice(index, index + M4M.FirebaseRow));
-	index += M4M.FirebaseRow;
+	if(index == 0) $timeout(() => $scope.formChanged = false);
 	if(!isChanged) $timeout(() => $scope.formChanged = isChanged);
+	index += M4M.FirebaseRow;
 }
 
 // AnLaVN - Add Income to list
