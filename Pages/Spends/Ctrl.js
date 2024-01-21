@@ -38,13 +38,13 @@ $scope.LoadMoreData = function(){
 // AnLaVN - Add Spends to list
 $scope.AddSpends = () => {
 	if($scope.Spends.every(e => e && e.category && e.wallet && e.time && e.content && e.price))  {
-		let last = angular.copy($scope.Spends.slice(-1)[0]);
-		last.id = uid();
-		last.time = $rootScope.viewTime(last.time).getDate() == new Date().getDate() ? last.time : new Date();
-		last.content = '';
-		last.price = 0;
-		$scope.Spends.unshift(last);
-		$rootScope.M4M.Spends.data.unshift(last);
+		let first = angular.copy($scope.Spends[0]);
+		first.id = uid();
+		first.time = $rootScope.viewTime(first.time).getDate() == new Date().getDate() ? first.time : new Date();
+		first.content = '';
+		first.price = 0;
+		$scope.Spends.unshift(first);
+		$rootScope.M4M.Spends.data.unshift(first);
 		$('#ScrollTop').click();
 	};
 }

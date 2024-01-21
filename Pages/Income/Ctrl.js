@@ -38,13 +38,13 @@ $scope.LoadMoreData = () => {
 // AnLaVN - Add Income to list
 $scope.AddIncome = () => {
 	if($scope.Income.every(e => e && e.wallet && e.time && e.content && e.price))  {
-		let last = angular.copy($scope.Income.slice(-1)[0]);
-		last.id = uid();
-		last.time = $rootScope.viewTime(last.time).getDate() == new Date().getDate() ? last.time : new Date();
-		last.content = '';
-		last.price = 0;
-		$scope.Income.unshift(last);
-		$rootScope.M4M.Income.data.unshift(last);
+		let first = angular.copy($scope.Income[0]);
+		first.id = uid();
+		first.time = $rootScope.viewTime(first.time).getDate() == new Date().getDate() ? first.time : new Date();
+		first.content = '';
+		first.price = 0;
+		$scope.Income.unshift(first);
+		$rootScope.M4M.Income.data.unshift(first);
 		$('#ScrollTop').click();
 	};
 }
