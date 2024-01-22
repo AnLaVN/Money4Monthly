@@ -1,7 +1,7 @@
 app.controller("ConfigCtrl", ["$scope", "$rootScope", "$timeout", "$translate", function ($scope, $rootScope, $timeout, $translate) {
 //-------------------------------------------------- Environment variable
 $scope.config = null;
-$scope.FirebaseConfig = decodeEntity(M4M.FirebaseConfigExample);
+$scope.FirebaseConfig = M4M.FirebaseConfigExample;
 $(`#Modal_Config`).off("show.bs.modal");
 $(`#Modal_Config`).on("show.bs.modal", async function () {
 	$scope.$apply(() => {

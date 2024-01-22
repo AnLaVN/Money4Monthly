@@ -9,7 +9,7 @@ const M4M = {
 	],
 	TutorialConfig: "M4M_TutorialConfig",
 	FirebaseConfig: "M4M_FirebaseConfig",
-	FirebaseConfigExample: '{&#13;"apiKey": "&lt;API_KEY&gt;",&#13;"authDomain": "&lt;PROJECT_ID&gt;.firebaseapp.com",&#13;"projectId": "&lt;PROJECT_ID&gt;",&#13;"storageBucket": "&lt;PROJECT_ID&gt;.appspot.com",&#13;"messagingSenderId": "&lt;MESSAGING_ID&gt;",&#13;"appId": "&lt;APP_ID>"&#13;}',
+	FirebaseConfigExample: '{\n\t"apiKey": "<API_KEY>",\n\t"authDomain": "<PROJECT_ID>.firebaseapp.com",\n\t"projectId": "<PROJECT_ID>",\n\t"storageBucket": "<PROJECT_ID>.appspot.com",\n\t"messagingSenderId": "<MESSAGING_ID>",\n\t"appId": "<APP_ID>"\n}',
 	FirebaseRow: 20,
 	CategoryDiscount: "GiamGia",
 	Currency: "https://gist.githubusercontent.com/ksafranski/2973986/raw/Common-Currency.json",
@@ -36,11 +36,6 @@ const uid = () => Date.now().toString(36) + Math.random().toString(36).substring
 const replaceCurrency = (input, add) => {
 	if (typeof input !== 'string') input = input.toString();
 	return add ? input.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : input.replace(/\D/g, "");
-}
-const decodeEntity = inputStr => {
-	var textarea = document.createElement('textarea');
-	textarea.innerHTML = inputStr;
-	return textarea.value;
 }
 const isDiscount = id => id == M4M.CategoryDiscount ? -1 : 1;
 let M4Mfs;
