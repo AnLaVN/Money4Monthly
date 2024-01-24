@@ -1,22 +1,22 @@
 app.config(function ($routeProvider) {
 	$routeProvider
-		.when("/home", { // Trang chủ
+		.when("/home", {
 			templateUrl: "Pages/Home/index.html",
 			controller: "HomeCtrl"
 		})
-		.when("/income", { // Trang thu nhập
+		.when("/income", {
 			templateUrl: "Pages/Income/index.html",
 			controller: "IncomeCtrl"
 		})
-		.when("/spends", { // Trang chi tiêu
+		.when("/spends", {
 			templateUrl: "Pages/Spends/index.html",
 			controller: "SpendsCtrl"
 		})
-		.when("/statistical", { // Trang thống kê
+		.when("/statistical", {
 			templateUrl: "Pages/Statistical/index.html",
 			controller: "StatisticalCtrl"
 		})
-		.when("/error", { // Trang báo lỗi
+		.when("/error", {
 			templateUrl: "Pages/Error/index.html",
 			controller: "MainCtrl"
 		})
