@@ -28,4 +28,4 @@ html, body, * {
 	outline-offset: -6px;
 	-webkit-transition: -webkit-transform 0.2s;
 	transition: transform 0.2s;
-  }
+}

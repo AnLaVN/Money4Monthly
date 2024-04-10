@@ -37,6 +37,7 @@ $scope.LoadMoreData = function(){
 
 // AnLaVN - Add Spends to list
 $scope.AddSpends = () => {
+	if($scope.Spends.length == 0) $scope.Spends.push({category: "", wallet: "", time: null, content: "", price: 0})
 	if($scope.Spends.every(e => e && e.category && e.wallet && e.time && e.content && e.price))  {
 		let first = angular.copy($scope.Spends[0]);
 		first.id = uid();
