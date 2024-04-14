@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+
+
+	<div class="dropdown">
+		<button class="btn bg-body-secondary rounded-circle border position-fixed top-0 end-0 m-3 p-0 text-center" style="height:3rem;width:3rem;z-index:1035" data-bs-toggle="dropdown" data-bs-auto-close="outside">
+			<i class="bi bi-funnel fs-5"></i>
+		</button>
+		<div class="dropdown-menu dropdown-menu-end p-3" style="width:18rem; z-index:1060">
+			<div class="hstack mt-3">
+				<div class="col">{{'filter.groupBy' | translate}}</div>
+				<div class="col">
+					<select class="form-select" ng-model="$parent.groupBy" ng-change="drawChartMonthly()">
+						<option class="bg-body" value="day">{{'filter.day' | translate}}</option>
+						<option class="bg-body" value="month">{{'filter.month' | translate}}</option>
+						<option class="bg-body" value="year">{{'filter.year' | translate}}</option>
+					</select>
+				</div>
+			</div>
+			<div class="hstack mt-3 mb-4">
+				<div class="col">{{'records.number' | translate}}</div>
+				<div class="col">
+					<select class="form-select" ng-model="$parent.viewRecord" ng-change="drawChartMonthly()">
+						<option value="" selected>{{'records.all' | translate}}&nbsp;-&nbsp;{{totalRecord}}</option>
+						<option ng-repeat="i in [].constructor(totalRecord - 1) track by $index" value="{{$index+1}}">{{$index+1}}</option>
+					</select>
+				</div>
+			</div>
+			<div class="p-0">{{'income.total' | translate}}<b class="ms-2">{{Income | currency:'':0}}&nbsp;{{currency}}</b></div>
+			<div class="p-0">{{'spends.total' | translate}}<b class="ms-2">{{Spends | currency:'':0}}&nbsp;{{currency}}</b></div>
+			<div class="p-0">{{'residual.total' | translate}}<b class="ms-2">{{Residual | currency:'':0}}&nbsp;{{currency}}</b></div>
+			<button class="btn btn-danger mt-5 w-100" ng-click="$parent.groupBy='month';$parent.viewRecord='';drawChartMonthly()">{{'filter.delete' | translate}}</button>
+		</div>
+	</div>
+
+
+</body>
+</html>

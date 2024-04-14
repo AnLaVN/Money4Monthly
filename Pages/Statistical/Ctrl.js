@@ -1,7 +1,10 @@
 app.controller("StatisticalCtrl", ["$scope", "$rootScope", "$location", "$timeout", "$filter", "$translate", function ($scope, $rootScope, $location, $timeout, $filter, $translate) {
 //-------------------------------------------------- Environment variable
 $rootScope.AppPath = $location.path().substring($location.path().lastIndexOf("/"));
-$scope.Statistical = {name: "spends", groupBy: "day"}
+$scope.Statistical = {name: "spends", groupBy: "day"};
+$scope.groupBy = "month";
+$scope.viewRecord = "";
+$scope.totalRecord = 0;
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Environment variable
 
 
@@ -36,10 +39,23 @@ function drawChart(config){
 }
 
 $scope.isLoadedData = () => $rootScope.M4M.Income.data && $rootScope.M4M.Spends.data;
+$scope.loadData = () => {
+	$scope.Income = $rootScope.getTotal($rootScope.M4M.Income.data);
+	$scope.Spends = $rootScope.getTotal($rootScope.M4M.Spends.data)
+	$scope.Residual = $scope.Income - $scope.Spends;
+	$scope.currency = $rootScope.getCurrency($rootScope.M4M.Wallet.currency).symbol_native;
+}
 $scope.drawChartMonthly = function(){
-	let income = getGroupBy($rootScope.M4M.Income.data, "month");
-	let spends = getGroupBy($rootScope.M4M.Spends.data, "month");
+	let income = getGroupBy($rootScope.M4M.Income.data, $scope.groupBy);
+	let spends = getGroupBy($rootScope.M4M.Spends.data, $scope.groupBy);
 	let residual = income.map((i, index) => ({...i, total: i.total - spends[index].total }) );
+	$scope.totalRecord = residual.length;
+	if($scope.viewRecord > 0) {
+		const viewRecord = $scope.viewRecord * -1;
+		income = income.slice(viewRecord);
+		spends = spends.slice(viewRecord);
+		residual = residual.slice(viewRecord);
+	}
 	const config = {
 		type: 'bar',
 		data: {
