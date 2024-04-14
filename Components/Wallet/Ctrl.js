@@ -80,6 +80,11 @@ $scope.SaveWallet = function(){
 		$rootScope.AddNotifis($translate.instant('notifi.fs_update_duplicate', ({...firestore, dup: de.id})), "warning");
 		return false;
 	}
+	let l = $rootScope.M4M.Spends.data.filter(c => !$scope.Wallet.some(o => o.id == c.wallet));
+	if(l.length > 0) {
+		$rootScope.AddNotifis($translate.instant('notifi.fs_delete_duplicate', ({...firestore, dup: l[0].wallet})), "warning");
+		return false;
+	}
 	const newData = {data: angular.copy($scope.Wallet), currency: $scope.Currency, time: new Date()}
 	M4Mfs.collection(M4M.AppName).doc($rootScope.M4M.Wallet.name).update(newData).then(() => {
 		$timeout(() => {$rootScope.AddNotifis($translate.instant('notifi.fs_update_success', firestore), "success")}, 10);
