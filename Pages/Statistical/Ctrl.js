@@ -31,12 +31,6 @@ function getGroupByCategory(arr, groupBy){
 	let data = arr.filter(e => e.category === groupBy);
 	return data ? Math.abs($rootScope.getTotal(data)) : 0;
 }
-function drawChart(config){
-	let oldChart = Chart.getChart("Statistical-Chart");
-	if (oldChart != undefined) oldChart.destroy();
-	Chart.defaults.font.family = 'Dosis';
-	new Chart(document.getElementById("Statistical-Chart").getContext("2d"), config);
-}
 
 $scope.isLoadedData = () => $rootScope.M4M.Income.data && $rootScope.M4M.Spends.data;
 $scope.loadData = () => {
@@ -56,6 +50,7 @@ $scope.drawChartMonthly = function(){
 		spends = spends.slice(viewRecord);
 		residual = residual.slice(viewRecord);
 	}
+	
 	const config = {
 		type: 'bar',
 		data: {
@@ -64,8 +59,8 @@ $scope.drawChartMonthly = function(){
 				type: 'line',
 				label: $translate.instant("income.name"),
 				data: income.map(e => e.total),
-				pointRadius: 10,
-				pointHoverRadius: 20,
+				pointRadius: 8,
+				pointHoverRadius: 15,
 				backgroundColor: M4M.ChartColor[0]+'33',
 				borderColor: M4M.ChartColor[0],
 				borderWidth: 2,
@@ -93,8 +88,8 @@ $scope.drawChartMonthly = function(){
 				label: c.icon + ' ' + c.name,
 				data: spends.map(e => getGroupByCategory(e.data, c.id)),
 				hidden: true,
-				pointRadius: 10,
-				pointHoverRadius: 20,
+				pointRadius: 8,
+				pointHoverRadius: 15,
 				backgroundColor: M4M.ChartColor[index+3]+'33',
 				borderColor: M4M.ChartColor[index+3],
 				borderWidth: 2,
@@ -110,7 +105,11 @@ $scope.drawChartMonthly = function(){
 			}
 		}
 	}
-	drawChart(config);
+
+	let oldChart = Chart.getChart("Statistical-Chart");
+	if (oldChart != undefined) oldChart.destroy();
+	Chart.defaults.font.family = 'Dosis';
+	new Chart(document.getElementById("Statistical-Chart").getContext("2d"), config);
 }
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Logic function
 }]);
