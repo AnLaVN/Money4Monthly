@@ -12,6 +12,10 @@ app.config(function ($routeProvider) {
 			templateUrl: "Pages/Spends/index.html",
 			controller: "SpendsCtrl"
 		})
+		.when("/spendinglimit", {
+			templateUrl: "Pages/SpendingLimit/index.html",
+			controller: "SpendingLimitCtrl"
+		})
 		.when("/statistical", {
 			templateUrl: "Pages/Statistical/index.html",
 			controller: "StatisticalCtrl"
@@ -21,6 +25,6 @@ app.config(function ($routeProvider) {
 			controller: "MainCtrl"
 		})
 		.otherwise({
-			redirectTo: "/error"
+			redirectTo: "/home"
 		});
 });

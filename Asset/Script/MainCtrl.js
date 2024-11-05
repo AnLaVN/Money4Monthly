@@ -1,8 +1,8 @@
-app.controller("MainCtrl", ["$scope", "$rootScope", "$http", "$timeout", "$translate", function ($scope, $rootScope, $http, $timeout, $translate) {
+app.controller("MainCtrl", ["$scope", "$rootScope", "$http", "$timeout", "$filter", "$translate", function ($scope, $rootScope, $http, $timeout, $filter, $translate) {
 //-------------------------------------------------- Environment variable
 $rootScope.AppTheme = localStorage.getItem(M4M.AppTheme) || 'dark';
 $scope.Notifis = [];
-$rootScope.M4M = {Wallet:{name:"Wallet"}, Category:{name:"Category"}, Income:{name:"Income"}, Spends:{name:"Spends"}};
+$rootScope.M4M = {Wallet:{name:"Wallet"}, Category:{name:"Category"}, Income:{name:"Income"}, Spends:{name:"Spends"}, SpendingLimit:{name:"SpendingLimit"}};
 $http.get(M4M.Currency).then(res => $rootScope.Currencys = res.data);
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Environment variable
 
@@ -73,10 +73,29 @@ $rootScope.Tutorial = (isView, scope, steps) => {
 	}
 }
 
+
 $rootScope.viewTime = time => time && time.seconds ? new Date(time.seconds * 1000) : time;
 $rootScope.getCategory = id => $rootScope.M4M.Category.data.find(e => e.id === id);
 $rootScope.getWallet = id => $rootScope.M4M.Wallet.data.find(e => e.id === id);
 $rootScope.getCurrency = code => $rootScope.Currencys[code];
 $rootScope.getTotal = arr => arr && arr.reduce((sum, e) => sum + (Number(replaceCurrency(e.price, false) || 0) * isDiscount(e.category)), 0);
+$rootScope.getGroupBy = (arr, groupBy) => {
+	let data = arr.reduce((acc, current) => {
+		const date = $rootScope.viewTime(current.time),
+			year = date.getFullYear(), 
+			month = date.getMonth() + 1, 
+			day = date.getDate(),
+			key = groupBy == "year" ? `${year}-1` : (groupBy == "month" ? `${year}-${month}` : `${year}-${month}-${day}`);
+		
+		if (acc.has(key)) acc.get(key).data.push(current);
+		else acc.set(key, { time: new Date(key), data: [current] });
+		return acc;
+	}, new Map());
+	data = Array.from(data.values());
+	data = $filter('orderBy')(data, "time");
+	data.forEach(e => e.total = $rootScope.getTotal(e.data)); 
+	return data;
+}
+$rootScope.monthFormat = date => (date.getMonth()+1).toString().padStart(2, '0') + "/" + date.getFullYear();
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Logic function
 }]);

@@ -29,3 +29,9 @@ html, body, * {
 	-webkit-transition: -webkit-transform 0.2s;
 	transition: transform 0.2s;
 }
+.form-range::-webkit-slider-runnable-track {
+	background-color: transparent;
+}
+.form-range::-moz-range-track {
+	background-color: transparent;
+}

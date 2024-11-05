@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+
+
+	<div class="dropdown">
+		<button class="btn bg-body-secondary rounded-circle border position-fixed top-0 end-0 m-3 p-0 text-center" style="height:3rem;width:3rem;z-index:1035" data-bs-toggle="dropdown" data-bs-auto-close="outside">
+			<i class="bi bi-funnel fs-5"></i>
+		</button>
+		<div class="dropdown-menu dropdown-menu-end p-3" style="width:18rem; z-index:1060">
+			<div class="hstack mb-4">
+				<div class="col">{{'filter.month' | translate}}</div>
+				<div class="col">
+					<select class="form-select" ng-model="$parent.viewMonth" ng-change="drawChartLimit()">
+						<option ng-repeat="sm in SpendsByMonth track by $index" value="{{$index}}" {{$index === 0 && $parent.viewMonth === 0 ? 'selected' : ''}}>{{monthFormat(sm.time)}}</option>
+					</select>
+				</div>
+			</div>
+			<div class="p-0">{{'spendinglimit.total' | translate}}<b class="ms-2">{{M4M.SpendingLimit.data.limit | currency:'':0}}&nbsp;{{currency}}</b></div>
+			<div class="p-0">{{'spends.total' | translate}}<b class="ms-2">{{SpendsByMonth[viewMonth].total | currency:'':0}}&nbsp;{{currency}}</b></div>
+			<div class="p-0">{{'residual.total' | translate}}<b class="ms-2">{{M4M.SpendingLimit.data.limit - SpendsByMonth[viewMonth].total | currency:'':0}}&nbsp;{{currency}}</b></div>
+			<button class="btn btn-danger mt-5 w-100" ng-click="$parent.viewMonth='0';drawChartLimit()">{{'filter.delete' | translate}}</button>
+		</div>
+	</div>
+
+
+</body>
+</html>

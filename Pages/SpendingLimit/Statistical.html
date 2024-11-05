@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+
+
+
+	<div class="container-lg mb-5" ng-if="isLoadedData()" ng-init="loadDataChart(); drawChartLimit()" style="height: max(100dvh, {{(CategoryLimit.length || 0) * 30 + 50}}px)">
+		<canvas id="SpendingLimit-Chart"></canvas>
+	</div>
+
+
+</body>
+</html>

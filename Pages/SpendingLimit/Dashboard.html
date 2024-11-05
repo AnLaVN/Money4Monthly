@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+
+	
+	<div ng-include="'Components/Loading'" ng-if="!M4M.SpendingLimit.data"></div>
+
+	<div ng-if="M4M.SpendingLimit.data" ng-init="LoadTutorial(); LoadData()">
+		<div class="col-12 col-md-8 col-lg-7 col-xl-6 mx-auto">
+			<ul class="list-group">
+				<li class="list-group-item bg-purple text-center fs-4 fs-bold">
+					{{'spendinglimit.name' | translate}}<b class="ms-2">{{totalLimit() || 0 | currency:'':0}}&nbsp;{{currency}}</b>
+				</li>
+				<li class="list-group-item text-center hstack">
+					<label for="maxlimit" class="fw-bold">{{'spendinglimit.total' | translate}}</label>
+					<input type="text" id="maxlimit" class="form-control bg-transparent focus-ring focus-ring-0 border-0 w-auto ms-auto pe-0 text-end" placeholder="{{'spendinglimit.name' | translate}}" ng-blur="formatCurrency($event)" ng-model="SpendingLimit.limit">
+				</li>
+				<li class="list-group-item vstack" ng-repeat="category in SpendingLimit.category">
+					<label class="form-label w-100 d-flex" for="{{category.id}}">
+						<b>{{category.icon}}</b>
+						<b class="fs-6 me-auto">{{category.name}}</b>
+						<b>{{limit}}% - {{priceOfLimit(category.limit) | currency:'':0}}&nbsp;{{currency}}</b>
+					</label>
+					<div class="position-relative overflow-visible">
+						<input type="range" class="form-range position-absolute top-50 start-50 translate-middle z-2" id="{{category.id}}" ng-init="limit = category.limit || 0" ng-change="limit = allwaySmallThanLimit(limit, category.id); category.limit = limit" ng-model="limit" min="0" max="100" step="0.1">
+						<div class="progress z-1" role="progressbar" style="height: 8px;">
+							<div class="progress-bar" style="width: {{limit}}%"></div>
+						</div>
+					</div>
+				</li>
+			</ul>
+
+			
+			<div class="row m-0 p-0 mt-5 sticky-bottom">
+				<div class="col m-0 p-0 align-self-center">
+					<div class="form-text">{{'m4m.updatetime' | translate:{time: viewTime(M4M.SpendingLimit.time)} }}</div>
+				</div>
+				<div class="col-auto m-0 p-0 align-self-center">
+					<button class="btn-Purple px-3 px-sm-5" ng-disabled="!formChanged" ng-click="SaveSpendingLimit()">{{'m4m.save' | translate}}<i class="bi bi-floppy ms-2"></i></button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+</html>

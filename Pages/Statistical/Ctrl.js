@@ -1,4 +1,4 @@
-app.controller("StatisticalCtrl", ["$scope", "$rootScope", "$location", "$timeout", "$filter", "$translate", function ($scope, $rootScope, $location, $timeout, $filter, $translate) {
+app.controller("StatisticalCtrl", ["$scope", "$rootScope", "$location", "$translate", function ($scope, $rootScope, $location, $translate) {
 //-------------------------------------------------- Environment variable
 $rootScope.AppPath = $location.path().substring($location.path().lastIndexOf("/"));
 $scope.Statistical = {name: "spends", groupBy: "day"};
@@ -10,23 +10,6 @@ $scope.totalRecord = 0;
 
 
 //-------------------------------------------------- Logic function
-function getGroupBy(arr, groupBy){
-	let data = arr.reduce((acc, current) => {
-		const date = $rootScope.viewTime(current.time),
-			year = date.getFullYear(), 
-			month = date.getMonth() + 1, 
-			day = date.getDate(),
-			key = groupBy == "year" ? `${year}-1` : (groupBy == "month" ? `${year}-${month}` : `${year}-${month}-${day}`);
-		
-		if (acc.has(key)) acc.get(key).data.push(current);
-		else acc.set(key, { time: new Date(key), data: [current] });
-		return acc;
-	}, new Map());
-	data = Array.from(data.values());
-	data = $filter('orderBy')(data, "time");
-	data.forEach(e => e.total = $rootScope.getTotal(e.data)); 
-	return data;
-}
 function getGroupByCategory(arr, groupBy){
 	let data = arr.filter(e => e.category === groupBy);
 	return data ? Math.abs($rootScope.getTotal(data)) : 0;
@@ -40,8 +23,8 @@ $scope.loadData = () => {
 	$scope.currency = $rootScope.getCurrency($rootScope.M4M.Wallet.currency).symbol_native;
 }
 $scope.drawChartMonthly = function(){
-	let income = getGroupBy($rootScope.M4M.Income.data, $scope.groupBy);
-	let spends = getGroupBy($rootScope.M4M.Spends.data, $scope.groupBy);
+	let income = $rootScope.getGroupBy($rootScope.M4M.Income.data, $scope.groupBy);
+	let spends = $rootScope.getGroupBy($rootScope.M4M.Spends.data, $scope.groupBy);
 	let residual = income.map((i, index) => ({...i, total: i.total - spends[index].total }) );
 	$scope.totalRecord = residual.length;
 	if($scope.viewRecord > 0) {
@@ -54,7 +37,7 @@ $scope.drawChartMonthly = function(){
 	const config = {
 		type: 'bar',
 		data: {
-			labels: residual.map(e => $filter('date')(e.time)),
+			labels: residual.map(e => $rootScope.monthFormat(e.time)),
 			datasets: [{
 				type: 'line',
 				label: $translate.instant("income.name"),

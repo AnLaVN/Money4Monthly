@@ -33,6 +33,11 @@
 					</a>
 				</li>
 				<li class="nav-item">
+					<a href="#!spendinglimit" class="nav-link {{isThisPage('/spendinglimit')}}" ng-click="closeMenuBar()">
+						<i class="bi bi-cash-stack fs-6 me-2"></i>{{'spendinglimit.name' | translate}}
+					</a>
+				</li>
+				<li class="nav-item">
 					<a href="#!statistical" class="nav-link {{isThisPage('/statistical')}}" ng-click="closeMenuBar()">
 						<i class="bi bi-graph-up fs-6 me-2"></i>{{'statistical.name' | translate}}
 					</a>
@@ -73,8 +78,7 @@
 			</ul>
 			<div class="hstack dropdown mt-auto">
 				<button class="btn d-flex align-items-center dropdown-toggle border-0" data-bs-toggle="dropdown">
-					<img src="https://github.com/{{Author}}.png" width="32" height="32" class="rounded-circle me-2">
-					<strong>{{Author}}</strong>
+					<i class="bi bi-gear me-2"></i>{{'m4m.setting' | translate}}
 				</button>
 				<div ng-include="'Components/ThemeToggle'" class="ms-auto"></div>
 				<ul class="dropdown-menu text-small shadow">
